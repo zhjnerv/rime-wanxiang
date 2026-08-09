@@ -33409,7 +33409,6 @@ sort: by_weight
 痑	shǐ;bd	1
 碩	shí;uy	1
 秲	shì;hs	1
-笹	shì;vu	1
 箷	shī;vu	1
 篩	shī;vu	1
 蒔	shì;cu	1
@@ -35990,6 +35989,7 @@ sort: by_weight
 籊	tì;vd,vv	3
 鮷	tí;yd	3
 嚔	tì;kv	3
+笹	tì;vu	1
 揥	tì;fd	1
 嗁	tí;kh	1
 鬀	tì;id	1
@@ -36889,10 +36889,10 @@ sort: by_weight
 𫟏	tù;ct	1
 团	tuán;kc	19264
 湍	tuān;de	2007
-団	tuán;kc	1789
-團	tuán;kv	1610
+抟	tuán;fv	1610
 疃	tuǎn;tt	1302
-抟	tuán;fv	800
+團	tuán;kv	800
+団	tuán;kc	489
 彖	tuàn;ju,uj	356
 漙	tuán;dv	324
 猯	tuān;qe	288
@@ -38862,10 +38862,6 @@ sort: by_weight
 徙	xǐ;xb,xv	543
 蟋	xī;ix	535
 栖	xī;mx	525
-腊	xī;ox	517
-卤	xī;ba	509
-洒	xǐ;dx	499
-猎	xī;qx	482
 烯	xī;hx	466
 兮	xī;bk	447
 禧	xǐ;ux	431
@@ -38910,11 +38906,15 @@ sort: by_weight
 郄	xì;eh,es	53
 忾	xì;xq	51
 歙	xī;qx,qy	51
+卤	xī;ba	49
 鳃	xǐ;ys	47
 谿	xī;gx	37
 舾	xī;vx	35
 屃	xì;ub	31
+洒	xǐ;dx	19
+腊	xī;ox	17
 鼷	xī;ux	13
+猎	xī;qx	12
 傒	xī;rx	10
 嶲	xī;ug,uj	9
 觿	xī;jj,jk	1
@@ -43139,8 +43139,6 @@ sort: by_weight
 舀	yǎo;vj	571
 乐	yào;pd,px	509
 侥	yáo;ry	500
-疟	yào;ba	499
-么	yāo;ps	489
 约	yāo;su	487
 瑶	yáo;wf	468
 曜	yào;od,ov	459
@@ -43159,6 +43157,7 @@ sort: by_weight
 洮	yáo;dv	294
 窕	yáo;xv,bv	293
 铫	yáo;jv	291
+么	yāo;ps	289
 垚	yáo;tt	282
 崾	yǎo;uy	265
 轺	yáo;iv	262
@@ -43210,6 +43209,7 @@ sort: by_weight
 鷂	yào;nf	67
 嶢	yáo;uy	62
 餆	yáo;uv	55
+疟	yào;ba	49
 暚	yáo;of	48
 覞	yào;jj	48
 狕	yǎo;qy	48

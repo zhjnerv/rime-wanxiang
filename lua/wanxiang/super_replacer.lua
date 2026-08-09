@@ -18,7 +18,7 @@ local s_upper = string.upper
 local t_sort = table.sort
 local type = type
 local tonumber = tonumber
-local DB_FORMAT_VERSION = "2"
+local DB_FORMAT_VERSION = "4"
 local MERGED_SCHEMA_IDS = {"wanxiang_pro", "wanxiang", "wanxiang_english", "wanxiang_t9", "wanxiang_t9i"}
 -- 模块私有数据库池：同名数据库共享包装器和生命周期。
 local DB_POOL = {}
@@ -209,58 +209,33 @@ local function tasks_signature(tasks)
     return digest_parts(parts)
 end
 
-local function enabled_schema_ids(env)
+-- 为兼容旧版 librime-lua，不使用 Config 接口，直接读取部署后的 build/default.yaml。
+local function enabled_schema_ids()
     local enabled = {}
-    local current = env.engine.schema.schema_id or ""
+    local file, close = wanxiang.load_file_with_fallback("build/default.yaml", "r")
 
-    local config = Config("default")
-    local list = config and config:get_list("schema_list")
-
-    if list then
-        for i = 0, list.size - 1 do
-            local item = list:get_at(i)
-            local map = item and item:get_map()
-            local value = map and map:get_value("schema")
-            local id = value and value:get_string()
-            if id then enabled[id] = true end
-        end
-
-        if current ~= "" then enabled[current] = true end
-    else
-        -- default.yaml 暂时不可读时按固定列表探测，不能退化为“仅当前方案”。
-        for _, id in ipairs(MERGED_SCHEMA_IDS) do
-            local schema = Schema(id)
-            if schema then enabled[id] = true end
-        end
+    for line in file:lines() do
+        local id = s_match(line, "^%s*%-%s*schema:%s*[\"']?([%w_%-]+)")
+        if id then enabled[id] = true end
     end
+    close()
 
     local ids = {}
     for _, id in ipairs(MERGED_SCHEMA_IDS) do
         if enabled[id] then ids[#ids + 1] = id end
     end
-
-    if #ids == 0 and current ~= "" then ids[1] = current end
     return ids
 end
 
--- 合并所有启用方案的数据任务，并生成固定的方案级表头特征。
-local function merge_build_tasks(env, ns, current_tasks)
-    local current_id = env.engine.schema.schema_id or ""
-    local enabled_ids = enabled_schema_ids(env)
+-- 合并 default.yaml 中已启用方案的数据任务，并生成固定的方案级表头特征。
+local function merge_build_tasks(ns)
     local groups = {}
     local signatures = {}
+    local schema_ids = enabled_schema_ids()
 
-    for order, id in ipairs(enabled_ids) do
-        local tasks = nil
+    for order, id in ipairs(schema_ids) do
         local schema = Schema(id)
-        if schema then
-            tasks = collect_build_tasks(schema.config, ns)
-        elseif id == current_id then
-            tasks = current_tasks
-        else
-            tasks = {}
-        end
-
+        local tasks = collect_build_tasks(schema.config, ns)
         groups[#groups + 1] = {id = id, order = order, tasks = tasks}
         signatures[id] = tasks_signature(tasks)
     end
@@ -282,7 +257,7 @@ local function merge_build_tasks(env, ns, current_tasks)
         end
     end
 
-    return merged, signatures, digest_parts(enabled_ids)
+    return merged, signatures, digest_parts(schema_ids)
 end
 
 local function next_value(value, start)
@@ -370,19 +345,18 @@ local function erase_raw_record(db, raw_key)
 end
 
 -- 重建数据库：
--- 1. 普通任务逐行写入，完全不进入转换逻辑；
--- 2. 转换任务逐行转换并按最终 key 聚合；
--- 3. 所有转换任务读取完成后，每个最终 key 只写入一次。
+-- 1. 普通任务按最终数据库 key 逐行写入，避免把全部词库堆在 Lua 内存中；
+-- 2. 重复判定始终包含 prefix，不同模块前缀互不比较；
+-- 3. 转换任务仅按“同一 prefix + 原始 key”判重，并按最终 key 聚合碰撞候选；
+-- 4. 普通任务与转换任务无论加载先后，最终 key 冲突时都合并候选，不丢数据。
 local function rebuild(tasks, db)
     local written_db_keys = {}
     local seen_converted_keys = nil
     local converted_groups = nil
     local converted_order = nil
-    local duplicate_count = 0
-    local invalid_count = 0
 
     for _, task in ipairs(tasks) do
-        local prefix = task.prefix
+        local prefix = task.prefix or ""
         local conversion = task.conversion
         local seen_source_keys = nil
 
@@ -411,9 +385,7 @@ local function rebuild(tasks, db)
                         if conversion then
                             local original_key = key
 
-                            if seen_source_keys[original_key] then
-                                duplicate_count = duplicate_count + 1
-                            else
+                            if not seen_source_keys[original_key] then
                                 seen_source_keys[original_key] = true
                                 key = s_gsub(key, ".", conversion)
                                 value = append_preedit(
@@ -435,20 +407,16 @@ local function rebuild(tasks, db)
                             end
                         else
                             local db_key = prefix .. key
-                            local grouped = converted_groups
-                                and converted_groups[db_key]
 
-                            if written_db_keys[db_key] or grouped then
-                                duplicate_count = duplicate_count + 1
-                            elseif not update_aggregate(db, db_key, value) then
-                                close()
-                                return false
-                            else
+                            -- db_key 已包含 prefix；只有同模块同 key 才视为重复。
+                            if not written_db_keys[db_key] then
+                                if not update_aggregate(db, db_key, value) then
+                                    close()
+                                    return false
+                                end
                                 written_db_keys[db_key] = true
                             end
                         end
-                    else
-                        invalid_count = invalid_count + 1
                     end
                 end
             end
@@ -461,10 +429,9 @@ local function rebuild(tasks, db)
         for _, db_key in ipairs(converted_order) do
             local value = concat(converted_groups[db_key], VALUE_SEPARATOR)
 
+            -- 普通任务可能在转换任务之前或之后读取；统一在这里合并。
             if written_db_keys[db_key] then
-                local old_value, old_raw_key =
-                    fetch_aggregate(db, db_key)
-
+                local old_value, old_raw_key = fetch_aggregate(db, db_key)
                 if not old_value or not old_raw_key then return false end
 
                 value = old_value .. VALUE_SEPARATOR .. value
@@ -473,22 +440,9 @@ local function rebuild(tasks, db)
 
             if not update_aggregate(db, db_key, value) then return false end
             written_db_keys[db_key] = true
-        end
-    end
 
-    if log and log.warning then
-        if duplicate_count > 0 then
-            log.warning(s_format(
-                "super_replacer: 已跳过 %d 行重复源 key，仅保留第一次出现",
-                duplicate_count
-            ))
-        end
-
-        if invalid_count > 0 then
-            log.warning(s_format(
-                "super_replacer: 已跳过 %d 行无效数据，格式必须为 key<真实Tab>候选1\\t候选2",
-                invalid_count
-            ))
+            -- 写入后立即释放当前碰撞组，降低重建阶段的尾部占用。
+            converted_groups[db_key] = nil
         end
     end
 
@@ -596,10 +550,6 @@ local function connect_db(
     end
 
     clear_table(env_query_cache)
-
-    if log and log.info then
-        log.info("super_replacer: 联合配置数据已重载，固定表头特征已记录")
-    end
 
     db:close()
 
@@ -763,7 +713,6 @@ function M.init(env)
     env.chain = chain_val and chain_val:get_bool() or false
 
     env.rules = {}
-    local tasks = {} 
 
     -- 3. 读取并遍历 rules 列表
     local rules_item = cfg_root and cfg_root:get("rules")
@@ -852,13 +801,7 @@ function M.init(env)
             -- T9 优化逻辑
             local t9_val = rule:get_value("t9_optimization")
             local t9_opt = t9_val and t9_val:get_bool() or false
-            local conversion_map = nil
-            local preedit_delim = nil
-            
-            if t9_opt then
-                conversion_map = T9_MAP
-                preedit_delim = "=="
-            end
+            local preedit_delim = t9_opt and "==" or nil
 
             local comment_mode_val = rule:get_value("comment_mode")
             local comment_mode = comment_mode_val and comment_mode_val:get_string() or "comment"
@@ -892,26 +835,11 @@ function M.init(env)
                 cand_type = custom_cand_type
             })
 
-            -- 解析文件路径列表
-            each_file_value(rule, function(file_value)
-                local source = file_value:get_string()
-                if source and source ~= "" then
-                    tasks[#tasks + 1] = {
-                        source = source,
-                        path = source,
-                        prefix = prefix,
-                        conversion = conversion_map,
-                        preedit_delim = preedit_delim
-                    }
-                end
-            end)
-
             ::continue_rule::
         end
     end
     
-    local merged_tasks, scheme_sigs, union_sig =
-        merge_build_tasks(env, ns, tasks)
+    local merged_tasks, scheme_sigs, union_sig = merge_build_tasks(ns)
 
     local rebuilt
     env.db, rebuilt = connect_db(
@@ -921,7 +849,7 @@ function M.init(env)
     if env.db then env.db_name = db_name end
 
     if rebuilt then
-        tasks, merged_tasks, scheme_sigs, union_sig = nil, nil, nil, nil
+        merged_tasks, scheme_sigs, union_sig = nil, nil, nil
         collectgarbage("collect")
     end
 end
