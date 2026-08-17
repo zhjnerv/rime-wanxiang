@@ -55,10 +55,8 @@ switches:
 # 输入引擎
 engine:
   processors:
-    - lua_processor@*wanxiang.compose*processor  #compose: 小键盘数字/运算符作普通字符参与(显示正常数码), 功能键/小键盘Enter直接不支持(吞键), 主键数字透传选词
     - lua_processor@*wanxiang.force_upper_aux  #自动将N-1首选数量的汉字大写辅助码施加到音节后面起到固定语句分词的作用
     - lua_processor@*wanxiang.user_predict*P  #靠自己养的专属预测联想处理器，不再依赖前端插件以及固定数据
-    - lua_processor@*wanxiang.super_symbols*P  #超级符号：选择「（字符分类）」候选（空格/回车/数字键）时展开为该分类全部条目（须置于 super_processor 之前以抢先拦截数字键）
     - lua_processor@*wanxiang.super_processor  #KP小键盘、字母选词、符号快打、超强分词、重复限制、退格限制、声调回退、以词定字
     - lua_processor@*wanxiang.super_english*P  #英文只能加空格捕获按键操作
     - lua_processor@*wanxiang.partial_commit  #通过ctrl+1~0局部提交10个字以内的句子的前几个字（一般为正确的前几个）使用时要遵循合理的分词结构能促进后续编码打出正确的词汇
@@ -88,12 +86,11 @@ engine:
     - lua_translator@*wanxiang.version_display  #输入'/wx'，显示万象项目网址和当前版本号
     - lua_translator@*wanxiang.set_schema  #输入'/zrm'，快速切换为自然码双拼， /flypy→小鹤双拼 /mspy→微软双拼 /zrm→自然码 /sogou→搜狗双拼 /abc→智能ABC /ziguang→紫光双拼 /pyjj→拼音加加 /gbpy→国标双拼 /lxsq→乱序17 /pinyin→全拼
     - lua_translator@*wanxiang.shijian  #农历、日期、节气、节日、时间、周、问候模板等等，触发清单看下文
-    - lua_translator@*wanxiang.unicode  #通过输入大写U引导，并输入Unicode编码获得汉字输出
-    - lua_translator@*wanxiang.compose*translator  #通过输入大写C引导，并依次键入Compose序列获得合成字符(仿系统Compose)
-    - lua_translator@*wanxiang.number_translator  #数字、金额大写，通过输入大写R1234获得候选输出
+    - lua_translator@*wanxiang.unicode_conversion  #通过输入大写U引导，并输入Unicode编码获得汉字输出
+    - lua_translator@*wanxiang.number_conversion  #数字、金额大写，通过输入大写R1234获得候选输出
     - lua_translator@*wanxiang.super_calculator  #超级计算器，Lua内查看高级用法
     - lua_translator@*wanxiang.input_statistics  #一个输入统计的脚本，以日、周、月、年等维度的统计
-    - lua_translator@*wanxiang.super_symbols*T  #超级符号库：/sym.arrow.r.double→⇒  /sym?arrow 或 /sym/arrow 模糊搜索  /emoji.xxx 同理
+    - lua_translator@*wanxiang.super_symbols  #超级符号库：/sym.arrow.r.double→⇒  /sym?arrow 或 /sym/arrow 模糊搜索  /emoji.xxx 同理
     - table_translator@custom_phrase  #自定义短语 custom_phrase.txt，用于置顶自定义编码候选词
     - lua_translator@*wanxiang.super_english*T  #英文词汇表导入，限流，格式化
     - table_translator@wanxiang_mixedcode  #混合编码词汇表导入
@@ -246,16 +243,15 @@ recognizer:
   import_preset: default  # 从 default.yaml 继承通用的
   patterns:  # 再增加方案专有的：
     # 排除 /sym /emoji 开头（含单独 /sym /emoji），交给 super_sym / super_emoji tag 处理
-    punct: "^/([0-9]|10|[A-Za-z]+)$"  # 响应 symbols.yaml 的 symbols
+    punct: '^/(([!-.:-df-rt-~][!-/:-~]*|s([!-/:-xz-~][!-/:-~]*|y([!-/:-ln-~][!-/:-~]*)?)?|e([!-/:-ln-~][!-/:-~]*|m([!-/:-np-~][!-/:-~]*|o([!-/:-ik-~][!-/:-~]*|j([!-/:-hj-~][!-/:-~]*)?)?)?)?)|[0-9]|10|11|110|0[3*~]|1[2-9^]|2[35^]|3[458^]|45|5[68]|78|88|[*]0|<3|\^[0-9]|_[0-9]|~0|[(]([0-9]|[1-4][0-9]|50)[)]?)$'  # 响应 symbols.yaml 的 symbols
     super_sym: "^/sym[.?/][A-Za-z.]+$"  # /sym.arrow.r.double 精确  /sym?keyword 或 /sym/keyword 模糊
     super_emoji: "^/emoji[.?/][A-Za-z.]+$"  # /emoji.apple.red  /emoji?keyword  /emoji/keyword
     super_sym_pre: "^/sym[.?/]?$"  # 仅 /sym /sym. /sym? /sym/ 模式提示
     super_emoji_pre: "^/emoji[.?/]?$"  # 仅 /emoji /emoji. /emoji? /emoji/ 模式提示
     wanxiang_reverse: "^`[A-Za-z;]*$"  # 响应部件拆字与笔画的反查，与 radical_lookup/prefix 匹配
     add_user_dict: "^``[A-Za-z/`']*$"  #自造词
-    unicode: "^U[a-f0-9]+"  # 脚本将自动获取第 2 个字符 U 作为触发前缀，响应 lua_translator@unicode，输出 Unicode 字符
-    compose: "^C.*"  # C 作为触发前缀，响应 lua_translator@compose，仿系统Compose合成字符
-    number: "^R[0-9]+[.]?[0-9]*"  # 脚本将自动获取第 2 个字符 R 作为触发前缀，响应 lua_translator@number_translator，数字金额大写
+    unicode: "^U([0-9A-Fa-f]*|[xXhH][0-9A-Fa-f]*|[dD][0-9]*|[bB][01]*|[oO][0-7]*|0[xX][0-9A-Fa-f]*|0[dD][0-9]*|0[bB][01]*|0[oO][0-7]*|\\+[0-9A-Fa-f]*|c.*)$"  # U 作为触发前缀，响应 lua_translator@unicode_conversion，输出 Unicode 字符
+    number: "^R(-|-?[0-9]+[.:]?[0-9]*)$"  # 脚本将自动获取第 2 个字符 R 作为触发前缀，响应 lua_translator@number_conversion，数字金额大写
     sjc: "^[/o]rc\\d+[-+=op]?$"
     yr1: "^N0[1-9]?0?[1-9]?"
     yr2: "^N1[02]?0?[1-9]?"
@@ -338,9 +334,9 @@ key_binder:
     # 当输入编码后发现没有词，则通过双击``进入造词模式而且不需要删除编码，这个功能与``直接引导相呼应相配合
     - {match: "^.*`$", accept: "`", send_sequence: '{BackSpace}{Home}{`}{`}{End}'}
     # 斜杠被占用引导符号，因此输入本身设置为双击
-    - {match: "^/$", accept: "/", send_sequence: '{space}',}
+    - {match: "^/$", accept: "/", send_sequence: '{space}'}
     #在预测符号状态下，按下斜杠提交清空与斜杠
-    - {match: "^›+$", accept: "backslash", send_sequence: '{Clear}{backslash}',}
+    - {match: "^›+$", accept: "backslash", send_sequence: '{Clear}{backslash}'}
     - { match: "^›+$", accept: "comma",    send_sequence: '{Clear}{comma}'}
     - { match: "^›+$", accept: "period",   send_sequence: '{Clear}{period}'}
     - {match: "^›+$", accept: "Return", send_sequence: '{Clear}{Return}'}
@@ -436,12 +432,12 @@ super_tips:
 # 中文 tips 已合并到 lua/data/tips_show.txt 末尾，开启 super_tips 后即可在输入时看到
 # 模式提示：仅输入 /sym /sym. /sym? /sym/ /emoji 等前缀时，候选区显示引导提示
 super_symbols:
-  prefix_sym:    "/sym"
-  prefix_emoji:  "/emoji"
+  prefix_sym: "/sym"
+  prefix_emoji: "/emoji"
   # 模糊搜索前缀由上面前缀 + 标记派生：? 与 / 平级，如 /sym?arrow 与 /sym/arrow 等价
   max_candidates: 30
-  data_sym:      "lua/data/codex_sym.txt"
-  data_emoji:    "lua/data/codex_emoji.txt"
+  data_sym: "lua/data/codex_sym.txt"
+  data_emoji: "lua/data/codex_emoji.txt"
 
 force_upper_aux:
   hotkey: "F1"  #用来固定候选的快捷键，原理是用双大写字母定字,能用组合键能用符号Tab等，按一下固定当前可见候选，按两下固定N-1个字状态下记录的字
@@ -465,7 +461,7 @@ super_sequence:  # Lua 配置：手动排序的快捷键 super_sequence.lua，�
 input_stats:
   db_name: "stats"  # 自定义统计数据库路径
   triggers:
-    clear: "/qctj"  # 清除数据（推荐长一点防误触）
+    local_total: "/btj"  # 查设备生涯统计
     today: "/rtj"  # 查今日（日统计）
     week: "/ztj"  # 查本周（周统计）
     month: "/ytj"  # 查本月（月统计）
@@ -654,6 +650,8 @@ charset_filter:
 #   n  月（不带前导零）     1-12       例：2
 #   d  日（前导零）        01-31      例：09
 #   j  日（不带前导零）     1-31       例：9
+#   B  月（英文完整单词）    August
+#   b  月（英文单词前缀）    Aug
 #
 # 【时间】
 #   H  24小时（前导零）   00-23      例：08
@@ -696,6 +694,10 @@ datetime_formats:
   - "YmdHMS"
   - "Y年m月d日 H点M分"
   - "y/m/d I:M p"
+english_date_formats:
+  - "B j, Y"
+  - "j b Y"
+  - "Y-m-d"
 
 # a/、单字母组合，触发预设编码自动上屏快符，支持将值设为"repeat" 以支持对应按键重复上屏功能，custom>schema>lua最终合并键值
 # 现在就支持26字母快符，结合成对符号输入，这边的压力小一些

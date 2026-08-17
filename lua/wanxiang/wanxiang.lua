@@ -5,7 +5,7 @@ local wanxiang = {}
 
 -- x-release-please-start-version
 
-wanxiang.version = "v17.2.4"
+wanxiang.version = "v17.4.0"
 
 -- x-release-please-end
 
@@ -337,6 +337,7 @@ function wanxiang.get_input_method_type(env)
     if md then return result_id, md end
     return result_id
 end
+
 -- Wanxiang Regex > Lua Pattern
 -- 支持：分组、嵌套分支、? 可选项、常用字符类及基础转义
 -- 不支持：断言、反向引用、{m,n}、分组后的 * 和 +
