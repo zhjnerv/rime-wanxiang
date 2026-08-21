@@ -339,12 +339,14 @@ local function render_abbreviation(typed, py, should_convert)
     return typed
 end
 
--- 判断26键音节是否属于简码：单字母，或完整卷舌声母 zh/ch/sh。
-local function is_alpha_abbreviation(part)
+local function is_alpha_abbreviation(part, state)
     if part:match("^[%a]$") then return true end
 
     local lower = part:lower()
-    return lower == "zh" or lower == "ch" or lower == "sh"
+    if lower ~= "zh" and lower ~= "ch" and lower ~= "sh" then
+        return false
+    end
+    return not state.input_method_type or state.input_method_type == "pinyin"
 end
 
 -- T9 优先处理：单数字是简码，多数字音节直接转换为完整拼音。
@@ -362,7 +364,7 @@ end
 local function convert_alpha_syllable(part, py, state)
     if state.is_pro then return py end
 
-    if is_alpha_abbreviation(part) then
+    if is_alpha_abbreviation(part, state) then
         return render_abbreviation(
             part, py, state.convert_abbrev_preedit
         )
@@ -441,9 +443,11 @@ function ZH.init(env)
         comment_split_pattern = "[^" .. escaped_delimiters .. "]+",
     }
 
+    env.input_method_type = nil
     env.is_t9 = false
     if wanxiang.get_input_method_type then
-        env.is_t9 = wanxiang.get_input_method_type(env) == "t9"
+        env.input_method_type = wanxiang.get_input_method_type(env)
+        env.is_t9 = env.input_method_type == "t9"
     end
 
     env.tone_map = {}
@@ -476,6 +480,7 @@ function ZH.func(input, env)
     local preedit_state = {
         is_t9 = is_t9,
         is_pro = is_wanxiang_pro,
+        input_method_type = env.input_method_type,
         is_full_pinyin = is_full_pinyin,
         tone_isolate = env.settings.tone_isolate,
         convert_abbrev_preedit =
@@ -487,7 +492,11 @@ function ZH.func(input, env)
 
     for cand in input:iter() do
         local genuine_cand = cand:get_genuine()
-        if genuine_cand.type == "shijian" or genuine_cand.type == "compose" or genuine_cand.type == "super_sym" or genuine_cand.type == "super_emoji" then
+        if genuine_cand.type == "shijian"
+            or genuine_cand.type == "compose"
+            or genuine_cand.type == "super_sym"
+            or genuine_cand.type == "super_emoji"
+        then
             yield(genuine_cand)
             goto continue
         end
@@ -519,7 +528,7 @@ function ZH.func(input, env)
         end
         -- 进入注释处理阶段
         -- ① 辅助码注释或者声调注释
-        if initial_comment and (string.find(initial_comment, "~") or cand.type == "shijian") then
+        if initial_comment and string.find(initial_comment, "~") then
             final_comment = initial_comment
 
             -- 2. 常规的辅助码提示模式

@@ -8057,6 +8057,7 @@ sort: by_weight
 隊	duì;eu	430
 対	duì;cw,wc	409
 镦	duī;jd	370
+㨃	duǐ;fx	361
 頧	duǐ;vy,yv	351
 兌	duì;bx,ek	271
 鐜	duī;jd	216
@@ -8075,7 +8076,6 @@ sort: by_weight
 痽	duī;bv	23
 譵	duì;yd	23
 濧	duì;dd	23
-㨃	duǐ;fx	1
 瀩	duì;dt	1
 㳔	duì;dd	1
 譈	duì;yd	1
@@ -33629,11 +33629,11 @@ sort: by_weight
 綬	shòu;su	164
 涭	shòu;du	160
 垨	shǒu;tu	159
+扌	shǒu;aa,fu,ti	7
 㥅	shòu;xu	1
 𠈅	shōu;ru	1
 𣒻	shòu;mt	1
 嘼	shòu;kk	1
-扌	shǒu;aa,fu,ti	1
 敊	shōu;px,uy	1
 醻	shòu;yu	1
 龵	shǒu;pp,kj,ub	1
@@ -37735,6 +37735,9 @@ sort: by_weight
 微	wēi;xw	9971
 维	wéi;sv	5132
 围	wéi;kw	4875
+尾	wěi;um	4776
+胃	wèi;ot,to	3765
+喂	wèi;kw	2719
 威	wēi;gn,ng,wn	938
 危	wēi;de	924
 谓	wèi;yw	911
@@ -37742,13 +37745,10 @@ sort: by_weight
 委	wěi;hn	864
 卫	wèi;ea,ga	820
 违	wéi;zw	779
-尾	wěi;um	776
 伟	wěi;rw	775
-胃	wèi;ot,to	765
 伪	wěi;rw	764
 魏	wèi;gw	754
 慰	wèi;xw	754
-喂	wèi;kw	719
 薇	wēi;cw	709
 畏	wèi;ty	690
 纬	wěi;sw	682

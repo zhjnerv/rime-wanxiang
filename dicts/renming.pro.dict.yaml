@@ -2121,11 +2121,8 @@ sort: by_weight
 尤瑞	yóu;ad,yd ruì;we	86
 尤萨	yóu;ad,yd sà;ci	86
 余安	yú;rb ān;bn	714
-余本	yú;rb běn;aa,ma	514
 余斌	yú;rb bīn;ww	697
-余波	yú;rb bō;dp	1403
 余东	yú;rb dōng;ad,qx	232
-余方	yú;rb fāng;dw	628
 余飞	yú;rb fēi;yd	108
 余风	yú;rb fēng;ji	25
 余虹	yú;rb hóng;ig	44
@@ -2502,7 +2499,8 @@ sort: by_weight
 周颂	zhōu;kj,kk sòng;yg	77
 周松	zhōu;kj,kk sōng;mg	73
 周通	zhōu;kj,kk tōng;zy	279
-周伟	zhōu;kj,kk wěi;rw	125
+周伟	zhōu;kj,kk wěi;rw	225
+周为	zhōu;kj,kk wéi;dd	197
 周文	zhōu;kj,kk wén;wi,dd	489
 周武	zhōu;kj,kk wǔ;vy,yv	5361
 周霞	zhōu;kj,kk xiá;yj,yy	184
@@ -2785,7 +2783,6 @@ sort: by_weight
 曹景行	cáo;oc,co jǐng;oj xíng;xd,xi	34
 曹克强	cáo;oc,co kè;eg,ux qiáng;gs	171
 曹立军	cáo;oc,co lì;da jūn;bi	34
-曹利用	cáo;oc,co lì;hd,dh yòng;kf	23
 曹稆孙	cáo;oc,co lǚ;hl sūn;zx	45
 曹梦迪	cáo;oc,co mèng;mx,xl dí;zy	364
 曹名长	cáo;oc,co míng;xk cháng;pd	513
@@ -3096,7 +3093,6 @@ sort: by_weight
 陈嘉桓	chén;ed jiā;uj huán;mg	116
 陈嘉辉	chén;ed jiā;uj huī;gj	27
 陈佳佳	chén;ed jiā;rg jiā;rg	641
-陈家驹	chén;ed jiā;bu jū;mj	32
 陈嘉俊	chén;ed jiā;uj jùn;rj,rw	111
 陈家俊	chén;ed jiā;bu jùn;rj,rw	56
 陈家来	chén;ed jiā;bu lái;am,wb	24
@@ -3108,7 +3104,6 @@ sort: by_weight
 陈家明	chén;ed jiā;bu míng;oo	142
 陈佳明	chén;ed jiā;rg míng;oo	25
 陈家强	chén;ed jiā;bu qiáng;gs	113
-陈家人	chén;ed jiā;bu rén;pd	90
 陈家园	chén;ed jiā;bu yuán;ky	37
 陈家源	chén;ed jiā;bu yuán;dy	25
 陈家珍	chén;ed jiā;bu zhēn;wp	51
@@ -6065,6 +6060,7 @@ sort: by_weight
 孔子下	kǒng;zg zǐ;aa,vh xià;ab,ad	23
 孔子也	kǒng;zg zǐ;aa,vh yě;gg	338
 孔最穴	kǒng;zg zuì;oq xué;bb	30
+莱德基	lái;cl dé;xx jī;tq,qt	436
 雷奥利	léi;yt ào;dm,pd lì;hd,dh	35
 雷暴雨	léi;yt bào;ou yǔ;ad	102
 雷贝琴	léi;yt bèi;ad,kr qín;wj	38
@@ -6120,12 +6116,8 @@ sort: by_weight
 雷平阳	léi;yt píng;aa,gb yáng;eo	35
 雷普利	léi;yt pǔ;ob,bo lì;hd,dh	99
 雷庆瑶	léi;yt qìng;gd yáo;wf	30
-雷区二	léi;yt qū;ki èr;aa	34
-雷区三	léi;yt qū;ki sān;aa	33
-雷区一	léi;yt qū;ki yī;aa	37
 雷荣祖	léi;yt róng;cm,mb zǔ;uq	59
 雷神岛	léi;yt shén;uu dǎo;nu,un	33
-雷神一	léi;yt shén;uu yī;aa	77
 雷斯贝	léi;yt sī;jq,qj bèi;ad,kr	23
 雷斯家	léi;yt sī;jq,qj jiā;bu	31
 雷斯库	léi;yt sī;jq,qj kù;gi	53
@@ -6150,8 +6142,6 @@ sort: by_weight
 雷志强	léi;yt zhì;xu,ux qiáng;gs	23
 雷志勇	léi;yt zhì;xu,ux yǒng;ly	51
 雷兹纳	léi;yt zī;by,qy nà;sn	122
-李阿大	lǐ;mz ā;ek dà;ad	97
-李阿婆	lǐ;mz ā;ek pó;nb	93
 李爱国	lǐ;mz ài;vy guó;ky	350
 李爱华	lǐ;mz ài;vy huá;uh	134
 李爱玲	lǐ;mz ài;vy líng;wl	96
@@ -6328,7 +6318,6 @@ sort: by_weight
 李大宝	lǐ;mz dà;ad bǎo;by	265
 李达超	lǐ;mz dá;zd chāo;zv	36
 李大成	lǐ;mz dà;ad chéng;gg,wg	55
-李大胆	lǐ;mz dà;ad dǎn;od	87
 李大发	lǐ;mz dà;ad fā;ay	1697
 李大国	lǐ;mz dà;ad guó;ky	25
 李大海	lǐ;mz dà;ad hǎi;dm	299
@@ -6357,8 +6346,6 @@ sort: by_weight
 李丹阳	lǐ;mz dān;pd yáng;eo	73
 李稻葵	lǐ;mz dào;hj,hy kuí;cg,ct	626
 李道明	lǐ;mz dào;zu míng;oo	39
-李导演	lǐ;mz dǎo;cs,sc yǎn;dy	54
-李道长	lǐ;mz dào;zu zhǎng;pd	28
 李道宗	lǐ;mz dào;zu zōng;bu	173
 李德才	lǐ;mz dé;xx cái;ap	28
 李德成	lǐ;mz dé;xx chéng;gg,wg	53
@@ -6417,12 +6404,6 @@ sort: by_weight
 李恩美	lǐ;mz ēn;xy měi;dy,yd	37
 李蒽熙	lǐ;mz ēn;ce xī;hs	349
 李恩珠	lǐ;mz ēn;xy zhū;wv	79
-李二狗	lǐ;mz èr;aa gǒu;qj	224
-李二郎	lǐ;mz èr;aa láng;el	52
-李二牛	lǐ;mz èr;aa niú;pa	3500
-李二人	lǐ;mz èr;aa rén;pd	465
-李二嫂	lǐ;mz èr;aa sǎo;ns,ny	106
-李二娃	lǐ;mz èr;aa wá;ng	76
 李尔王	lǐ;mz ěr;dx,xd wáng;aa	859
 李凡秀	lǐ;mz fán;dj,jd xiù;hn	39
 李芳芳	lǐ;mz fāng;cf fāng;cf	574
@@ -6456,8 +6437,7 @@ sort: by_weight
 李公麟	lǐ;mz gōng;sb,bs lín;ll	153
 李公朴	lǐ;mz gōng;sb,bs pǔ;mb	63
 李公佐	lǐ;mz gōng;sb,bs zuǒ;rz	78
-李狗蛋	lǐ;mz gǒu;qj dàn;ip,pi	130
-李狗嗨	lǐ;mz gǒu;qj hāi;kh	87
+李狗蛋	lǐ;mz gǒu;qj dàn;ip,pi	13
 李光地	lǐ;mz guāng;ea,xw dì;ty	376
 李光斗	lǐ;mz guāng;ea,xw dòu;du	94
 李光华	lǐ;mz guāng;ea,xw huá;uh	30
@@ -10374,6 +10354,17 @@ sort: by_weight
 孙子高	sūn;zx zi;aa,vh gāo;wk	25
 孙子孙	sūn;zx zi;aa,vh sūn;zx	1778
 孙子杨	sūn;zx zi;aa,vh yáng;my	32
+谭万钧	tán;yt wàn;ag,ap jūn;jy	297
+谭伟豪	tán;yt wěi;rw háo;ub,wu	274
+谭维义	tán;yt wéi;sv yì;di,id	342
+谭向东	tán;yt xiàng;pk dōng;ad,qx	328
+谭香文	tán;yt xiāng;ho wén;wi,dd	450
+谭小芳	tán;yt xiǎo;ad fāng;cf	414
+谭小平	tán;yt xiǎo;ad píng;aa,gb	0
+谭晓生	tán;yt xiǎo;oy shēng;na	209
+谭学军	tán;yt xué;zb,dz jūn;bi	194
+谭雅玲	tán;yt yǎ;vy,yv líng;wl	418
+谭雨涵	tán;yt yǔ;ad hán;dh	234
 陶艾青	táo;ef,et ài;ci qīng;of,fo	53
 陶百川	táo;ef,et bǎi;ab chuān;pa	33
 陶碧华	táo;ef,et bì;ub,up huá;uh	96
@@ -10823,7 +10814,6 @@ sort: by_weight
 王家宝	wáng;aa jiā;bu bǎo;by	37
 王家大	wáng;aa jiā;bu dà;ad	469
 王家峰	wáng;aa jiā;bu fēng;uf	31
-王家驹	wáng;aa jiā;bu jū;mj	31
 王佳梁	wáng;aa jiā;rg liáng;md	67
 王家烈	wáng;aa jiā;bu liè;hl	183
 王佳敏	wáng;aa jiā;rg mǐn;wm	46

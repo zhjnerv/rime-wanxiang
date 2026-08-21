@@ -3597,7 +3597,7 @@ english:
   __append:
     - xform/ⅱ//  # 用于 Lua 判断输入类型的标记
     - xform/^(.*);.*$/$1/
-    - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜüńňǹḿm̀/aaaaooooeeeeiiiiuuuuvvvvvnnnmmm/  # 剥离声调
+    - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜüńňǹḿm̀/aaaaooooeeeeiiiiuuuuvvvvvnnnmm/  # 剥离声调
     - derive/^ng$/eng/
     - xform/^n$/en/
     - xform/^m$/me/

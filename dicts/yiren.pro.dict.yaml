@@ -356,7 +356,6 @@ sort: by_weight
 法正	fǎ;dq zhèng;av	521
 樊登	fán;dm dēng;dd	702
 范范	fàn;ce,cf fàn;ce,cf	109
-樊哙	fán;dm kuài;kh	881
 范雷	fàn;ce,cf léi;yt	1230
 樊玲	fán;dm líng;wl	108
 范明	fàn;ce,cf míng;oo	163
@@ -712,7 +711,7 @@ sort: by_weight
 姬玉	jī;ni yù;ad,wd	5
 贾冰	jiǎ;bx,xb bīng;du	104
 郏捷	jiá;ej jié;fj	1
-家驹	jiā;bu jū;mj	502
+家驹	jiā;bu jū;mj	202
 贾玲	jiǎ;bx,xb líng;wl	537
 贾伦	jiǎ;bx,xb lún;rl	36
 贾青	jiǎ;bx,xb qīng;of,fo	220
@@ -818,7 +817,7 @@ sort: by_weight
 来喜	lái;am,wb xǐ;uk	3575
 赖艺	lài;uf yì;cy	39
 蓝波	lán;cj bō;dp	522
-斓曦	lán;wl xī;ox,og	12828
+斓曦	lán;wl xī;ox,og	228
 蓝燕	lán;cj yàn;ch,hb	133
 兰雨	lán;bs,qe yǔ;ad	30
 蓝禹	lán;cj yǔ;pd	2
@@ -828,7 +827,7 @@ sort: by_weight
 老臭	lǎo;bl,lb chòu;zq	46
 老狼	lǎo;bl,lb láng;ql	933
 雷汉	léi;yt hàn;dy	1115
-雷佳	léi;yt jiā;rg	1890
+雷佳	léi;yt jiā;rg	1290
 雷雷	léi;yt léi;yt	505
 雷明	léi;yt míng;oo	381
 雷牧	léi;yt mù;nw	26
@@ -875,7 +874,6 @@ sort: by_weight
 李宁	lǐ;mz níng;bd	14353
 李诺	lǐ;mz nuò;yr	48
 李倩	lǐ;mz qiàn;rq	162
-李强	lǐ;mz qiáng;gs	593
 李沁	lǐ;mz qìn;dx	141
 李卿	lǐ;mz qīng;mg,mj	148
 李泉	lǐ;mz quán;ub,bu	197
@@ -1634,7 +1632,7 @@ sort: by_weight
 王兴	wáng;aa xīng;ba,db	82
 王瑄	wáng;aa xuān;wx	1
 王迅	wáng;aa xùn;zu,zx	70
-王艳	wáng;aa yàn;fs	2940
+王艳	wáng;aa yàn;fs	940
 汪芫	wāng;dw yán;cy	1
 王阳	wáng;aa yáng;eo	115
 汪飏	wāng;dw yáng;fy	1
@@ -3978,6 +3976,7 @@ sort: by_weight
 胡歌吧	hú;og gē;qg ba;kb	234
 胡歌版	hú;og gē;qg bǎn;pf	16
 胡歌饰	hú;og gē;qg shì;uj	464
+胡冠珍	hú;og guān;bc zhēn;wp	194
 胡光子	hú;og guāng;ea,xw zǐ;aa,vh	12
 户国防	hù;dp,du guó;ky fáng;ef	318
 胡海峰	hú;og hǎi;dm fēng;uf	378
@@ -3990,11 +3989,15 @@ sort: by_weight
 胡慧中	hú;og huì;xh,fx zhōng;aa,ka	38
 胡家豪	hú;og jiā;bu háo;ub,wu	513
 胡嘉欣	hú;og jiā;uj xīn;qj,jq	37
+胡进庆	hú;og jìn;zj qìng;gd	6
+胡金秋	hú;og jīn;ra,pa qiū;hh	91
 胡金铨	hú;og jīn;ra,pa quán;jq	509
+胡竞英	hú;og jìng;lx yīng;cy	306
 胡军版	hú;og jūn;bi bǎn;pf	50
 胡军海	hú;og jūn;bi hǎi;dm	180
 胡凯莉	hú;og kǎi;jj,jq lì;cl	346
 胡乐平	hú;og lè;pd,px píng;aa,gb	279
+胡里奥	hú;og lǐ;aa,tt ào;dm,pd	94
 胡连华	hú;og lián;zi huá;uh	1
 胡连馨	hú;og lián;zi xīn;ux,xq,xu	16
 胡良伟	hú;og liáng;dg wěi;rw	100
@@ -4005,6 +4008,7 @@ sort: by_weight
 胡启志	hú;og qǐ;hk,kh zhì;xu,ux	22
 胡倩琳	hú;og qiàn;rq lín;wl	12
 胡清蓝	hú;og qīng;dq lán;cj	266
+胡萨克	hú;og sà;ci kè;eg,ux	432
 胡沙虎	hú;og shā;du hǔ;hj	16
 胡莎莎	hú;og shā;cu shā;cu	3
 呼斯楞	hū;kh sī;jq,qj léng;mf	356
@@ -6824,7 +6828,6 @@ sort: by_weight
 钱迪迪	qián;jj dí;zy dí;zy	12
 钱冬旎	qián;jj dōng;wd nǐ;fn	12
 钱哆多	qián;jj duō;kd duō;xx	15
-钱弘佐	qián;jj hóng;gs zuǒ;rz	410
 千虎珍	qiān;pa hǔ;hj zhēn;wp	302
 钱皇后	qián;jj huáng;bw hòu;pk	380
 钱惠丽	qián;jj huì;xh,hx lì;ad	326
@@ -7554,15 +7557,29 @@ sort: by_weight
 谭松韵	tán;yt sōng;mg yùn;yy	232
 谭天铭	tán;yt tiān;ad míng;jm	12
 谭天谦	tán;yt tiān;ad qiān;yj	12
+谭伟权	tán;yt wěi;rw quán;my	315
 谭维维	tán;yt wéi;sv wéi;sv	606
+覃文静	tán;xz wén;wi,dd jìng;qv	261
 谭希和	tán;yt xī;ib hé;hk	5
 谭湘君	tán;yt xiāng;dx jūn;ky	12
 谭晓凡	tán;yt xiǎo;oy fán;dj,jd	12
+谭小环	tán;yt xiǎo;ad huán;wb	19
+谭晓燕	tán;yt xiǎo;oy yàn;ch,hb	238
 谭歆柔	tán;yt xīn;qy róu;mm	12
+谭杏蓝	tán;yt xìng;mk,km lán;cj	351
 谭轩辕	tán;yt xuān;ig yuán;iy	233
+谈学斌	tán;yy xué;zb,dz bīn;ww	288
 谭盐盐	tán;yt yán;mb yán;mb	422
+谭耀文	tán;yt yào;gd,gv wén;wi,dd	44
 谭艺恒	tán;yt yì;cy héng;xg	12
+谭伊哲	tán;yt yī;ry zhé;kv	369
+谭永浩	tán;yt yǒng;dd hào;dg	310
+谭咏麟	tán;yt yǒng;ky lín;ll	656
 谭咏雯	tán;yt yǒng;ky wén;yw	1
+谭佑铭	tán;yt yòu;ry míng;jm	220
+谭友业	tán;yt yǒu;yu,uy yè;aa	207
+谭玉瑛	tán;yt yù;ad,wd yīng;wy	3
+谭元元	tán;yt yuán;aw,ee yuán;aw,ee	47
 谭志玲	tán;yt zhì;xu,ux líng;wl	12
 谭宗尧	tán;yt zōng;bu yáo;gw,wg	18
 唐安琪	táng;gk ān;bn qí;wq	6
@@ -10401,6 +10418,7 @@ sort: by_weight
 欧阳雯鑫	ōu;qq yáng;eo wén;yw xīn;jj	2
 排骨教主	pái;ff gǔ;go,ob,og jiào;wx zhǔ;dw	96
 苹果姐姐	píng;cp guǒ;ad,tm jiě;nq jie;nq	36
+浦野一美	pǔ;df yě;ly,yl yī;aa měi;dy,yd	423
 七海蒂娜	qī;ag hǎi;dm dì;cd nà;nn	10
 崎惠梨香	qí;uq huì;xh,hx lí;ml xiāng;ho	10
 七濑伊织	qī;ag lài;dl yī;ry zhī;sv	10
@@ -10540,7 +10558,12 @@ sort: by_weight
 小凑昭尚	xiǎo;ad còu;dz zhāo;ov shàng;xk	50
 小岛纯名	xiǎo;ad dǎo;nu,un chún;st míng;xk	10
 小岛阳菜	xiǎo;ad dǎo;nu,un yáng;eo cài;cc	252
+小濑村晶	xiǎo;ad lài;dl cūn;mc jīng;oo	99
+小栗美优	xiǎo;ad lì;mx,xm měi;dy,yd yōu;ry	45
 小栗美优	xiǎo;ad lì;mx,xm měi;dy,yd yōu;ry	10
+小笠原海	xiǎo;ad lì;vl yuán;ix hǎi;dm	266
+小岭丽奈	xiǎo;ad lǐng;ul lì;ad nài;du	220
+小柳由纪	xiǎo;ad liǔ;mm yóu;aa,ao jì;sj	194
 小梅惠奈	xiǎo;ad méi;mm huì;xh,hx nài;du	10
 小泉日向	xiǎo;ad quán;ub,bu rì;aa,or xiàng;pk	10
 小森美果	xiǎo;ad sēn;ml měi;dy,yd guǒ;ad,tm	6
