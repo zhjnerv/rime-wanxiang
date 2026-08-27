@@ -5,6 +5,7 @@ $ErrorActionPreference = 'Stop'
 
 $taskName = "Rime Auto Sync"
 $scriptPath = "C:\Users\ZhouH\AppData\Roaming\Rime\sync_rime.ps1"
+$pwshPath = "C:\Program Files\PowerShell\7\pwsh.exe"
 $userName = $env:USERNAME
 
 # 检查任务是否已存在
@@ -17,10 +18,10 @@ if ($existingTask) {
 # 创建触发器 - 每30分钟执行一次
 $trigger = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 30)
 
-# 创建操作
+# 创建操作（使用 pwsh 以避免 UTF-8 无 BOM 脚本编码问题）
 $action = New-ScheduledTaskAction `
-    -Execute "powershell.exe" `
-    -Argument "-WindowStyle Hidden -ExecutionPolicy Bypass -File `"$scriptPath`""
+    -Execute $pwshPath `
+    -Argument "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$scriptPath`""
 
 # 创建任务设置
 $settings = New-ScheduledTaskSettingsSet `
@@ -45,6 +46,7 @@ Register-ScheduledTask `
 Write-Host "任务创建成功！"
 Write-Host "任务名称: $taskName"
 Write-Host "执行间隔: 每30分钟"
+Write-Host "执行引擎: pwsh"
 Write-Host "脚本路径: $scriptPath"
 Write-Host ""
 Write-Host "可以在任务计划程序中查看和管理此任务"

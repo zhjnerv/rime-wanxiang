@@ -1,6 +1,6 @@
 # Rime 自动同步脚本
 # 用途: 调用 WeaselDeployer 进行同步操作
-# 使用方式: powershell.exe -WindowStyle Hidden -File sync_rime.ps1
+# 使用方式: pwsh -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File sync_rime.ps1
 
 $ErrorActionPreference = 'Stop'
 
@@ -27,11 +27,14 @@ if (-not $deployerPath) {
 # 执行同步
 Write-Host "开始同步 Rime 配置..."
 Write-Host "使用: $deployerPath"
-& $deployerPath /sync
 
-if ($LASTEXITCODE -eq 0) {
+# 使用 Start-Process 获取退出码，避免 PowerShell 无法捕获 GUI 程序退出码的问题
+$process = Start-Process -FilePath $deployerPath -ArgumentList "/sync" -Wait -PassThru
+$exitCode = $process.ExitCode
+
+if ($exitCode -eq 0) {
     Write-Host "同步完成"
 } else {
-    Write-Error "同步失败，退出码: $LASTEXITCODE"
-    exit $LASTEXITCODE
+    Write-Error "同步失败，退出码: $exitCode"
+    exit $exitCode
 }
