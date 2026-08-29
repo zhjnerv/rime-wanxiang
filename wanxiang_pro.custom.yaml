@@ -16,7 +16,7 @@ patch:
   
   translator/packs/+:
     - userzhj # 导入根目录下名称为userzhj.dict.yaml的自定义固定词典
-  translator/contextual_suggestions: false # 开启上下文预测
+  user_dict_set/contextual_suggestions: false # 关闭上下文预测
 
   # orq / /rq 日期候选顺序（覆盖 schema 默认 date_formats）：
   # 1. 2026年08月17日  2. 2026-08-17  3. 20260817  4. 8月17日  其余依次后移
