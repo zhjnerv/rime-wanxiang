@@ -8615,6 +8615,7 @@ sort: by_weight
 三溴甲锗烷	sān;aa xiù;di jiǎ;aa,oa zhě;jv wán;hw	10
 三溴新戊醇	sān;aa xiù;di xīn;jq wù;gp chún;yx	10
 三亚碲酸铪	sān;aa yà;ay dì;ud suān;yj,yw hā;jh	10
+三氧化二𰾭	sān;aa yǎng;qy huà;rb èr;aa ài;	10
 三氧化二铋	sān;aa yǎng;qy huà;rb èr;aa bì;jb	10
 三氧化二氮	sān;aa yǎng;qy huà;rb èr;aa dàn;qy	10
 三氧化二铥	sān;aa yǎng;qy huà;rb èr;aa diū;jd	10
@@ -8659,7 +8660,6 @@ sort: by_weight
 三氧化二镱	sān;aa yǎng;qy huà;rb èr;aa yì;jy	10
 三氧化二铟	sān;aa yǎng;qy huà;rb èr;aa yīn;jy	10
 三氧化二铕	sān;aa yǎng;qy huà;rb èr;aa yǒu;jy	10
-三氧化二𰾭	sān;aa yǎng;qy huà;rb èr;aa 𰾭;	10
 三氧化钛钙	sān;aa yǎng;qy huà;rb tài;jt gài;jg	12
 三异丙醇胺	sān;aa yì;cs,sc bǐng;an chún;yx àn;oa	10
 三乙二醇醚	sān;aa yǐ;vv èr;aa chún;yx mí;ym	10
@@ -9894,7 +9894,7 @@ sort: by_weight
 一氯代醋酸	yī;aa lǜ;ql dài;ry cù;yx suān;yj,yw	10
 一氯化苯醚	yī;aa lǜ;ql huà;rb běn;cb mí;ym	10
 一氯频哪酮	yī;aa lǜ;ql pín;yb nǎ;kn tóng;yt	10
-钇铝石榴石	yǐ;jy lǚ;jl shí;pk,kp liú;ml shí;pk,kp	10
+钇铝石榴石	yǐ;jy lǚ;jl shí;pk,kp liu;ml shí;pk,kp	10
 一氯乙酰氯	yī;aa lǜ;ql yǐ;vv xiān;yx lǜ;ql	10
 一氯乙锗烷	yī;aa lǜ;ql yǐ;vv zhě;jv wán;hw	10
 乙醚抽出物	yǐ;vv mí;ym chōu;fy chū;ck,aa wù;nw	10
@@ -12423,7 +12423,7 @@ sort: by_weight
 甲基乙基色胺	jiǎ;aa,oa jī;tq,qt yǐ;vv jī;tq,qt sè;db àn;oa	10
 甲基乙基酮肟	jiǎ;aa,oa jī;tq,qt yǐ;vv jī;tq,qt tóng;yt wò;ok	10
 甲基乙基戊烷	jiǎ;aa,oa jī;tq,qt yǐ;vv jī;tq,qt wù;gp wán;hw	10
-甲基异石榴碱	jiǎ;aa,oa jī;tq,qt yì;cs,sc shí;pk,kp liú;ml jiǎn;ux	10
+甲基异石榴碱	jiǎ;aa,oa jī;tq,qt yì;cs,sc shí;pk,kp liu;ml jiǎn;ux	10
 甲基异戊基酮	jiǎ;aa,oa jī;tq,qt yì;cs,sc wù;gp jī;tq,qt tóng;yt	10
 甲基异乌药碱	jiǎ;aa,oa jī;tq,qt yì;cs,sc wū;pa yào;cy jiǎn;ux	10
 甲基乙烯吡啶	jiǎ;aa,oa jī;tq,qt yǐ;vv xī;hx bǐ;kb dìng;kd	10

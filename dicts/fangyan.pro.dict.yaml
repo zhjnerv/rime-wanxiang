@@ -8,7 +8,7 @@ name: fangyan
 version: "LTS"
 sort: by_weight
 ...
-#大同话
+#北方方言-晋方言-大包片-大同小片
 红话	hóng;sg huà;yu
 勾留	gōu;gs liú;td
 呱嗒	guā;kg dā;kd,kh
@@ -280,22 +280,70 @@ sort: by_weight
 抽柚抽柚	chōu;fy yòu;my chōu;fy yòu;my
 错前摸后	cuò;jx qián;bd,qd mō;fm hòu;pk
 打杂烙毛	dǎ;fd zá;jm,mj lào;hg máo;pg
-#广东话
+#北方方言-西南官话
+㮟㮟角角	kā;mv kā;mv jiǎo;dy jiǎo;dy
+日白	rì;aa,or bái;pa,po	3
+厮儿	sī;is ér;pg	54
+鼁蟆	qù;mq má;im
+鼁蟆儿	qù;mq má;im ér;pg
+耳矢	ěr;aa shǐ;pt
+𢱟耳矢	chǎn;fi ěr;aa shǐ;pt
+𬲹𬲹	𬲹; 𬲹;
+#吴方言
+交春	jiāo;li,wf chūn;of,fo
+交秋	jiāo;li,wf qiū;hh
+借手	jiè;rx shǒu;pa,ub
+济手	jì;dq shǒu;pa,ub
+顺手	shùn;yi shǒu;pa,ub
+借眼	jiè;rx yǎn;og
+济眼	jì;dq yǎn;og
+顺眼	shùn;yi yǎn;og
+借脚	jiè;rx jiǎo;oq
+济脚	jì;dq jiǎo;oq
+顺脚	shùn;yi jiǎo;oq
+借手面	jiè;rx shǒu;pa,ub miàn;aa
+济手面	jì;dq shǒu;pa,ub miàn;aa
+顺手面	shùn;yi shǒu;pa,ub miàn;aa
+姆妈	mǔ;nm mā;nm
+阿姆	ā;ek mǔ;nm
+娘妗	niáng;nl jìn;nj
+老嬬	lǎo;bl,lb rú;nx
+老嬬儿	lǎo;bl,lb rú;nx ér;pg
+木卵	mù;ad luǎn;pd,md
+呆大	dāi;km dà;ad
+呆大头	dāi;km dà;ad tóu;dd
+戆大	gàng;xb,xg dà;ad
+青𬲼	qīng;of,fo 𬲼;
+菜蕻	cài;cc hóng;cg
+上蕻	shàng;aa,ba hóng;cg
+树蕻	shù;md hóng;cg
+坞堂	wù;tw táng;xt
+楐排	jiè;mj pái;ff
+楐棚	jiè;mj péng;mp
+忖忖	cǔn;xc cǔn;xc
+小揢	xiǎo;ad ké;fk
+剩落来	shèng;di luò;cl lái;am,wb
+望相	wàng;wo xiāng;mo
+样个	yàng;my gè;ra,pa
+#湘方言
 娭毑	āi;ny jiě;my
+撩撇	liāo;fl,fx piē;fb,fw
+了难	liǎo;aa,vu nán;yv
+恰得苦	qià;xh dé;xc kǔ;cg
+恰点酒	qià;xh diǎn;hv jiǔ;dy
+恰点东西	qià;xh diǎn;hv dōng;ad,qx xi;aa
+#粤方言
 饱咗	bǎo;ub zuo;kz
 睇戏	dì;od xì;yg
-了难	liǎo;aa,vu nán;yv
-撩撇	liāo;fl,fx piē;fb,fw
 埋数	mái;tl shù;wl
 闹热	nào;mu rè;hv
 恰酒	qià;xh jiǔ;dy
 唔该	wú;kw gāi;yh
 正嘢	zhèng;av yě;ky
-恰得苦	qià;xh dé;xc kǔ;cg
-恰点酒	qià;xh diǎn;hv jiǔ;dy
-恰点东西	qià;xh diǎn;hv dōng;ad,qx xi;aa
 系哩度	xì;ps lī;kl dù;gy
 到屋企	dào;dv wū;uv qǐ;rv
-㮟㮟角角	kā;mv kā;mv jiǎo;dy jiǎo;dy
 掂过碌蔗	diān;fd guò;zc lù;ul zhè;cd,ch,cu
 裹筋	guǒ;wy,yg jīn;vl
+便靓正	biàn;rg liàng;jq,qj zhèng;av
+唔够靓仔	wú;kw gòu;jd,xj liàng;jq,qj zǎi;rz
+最靓嘅猪腩肉	zuì;oq liàng;jq,qj kǎi;kj zhū;qv nǎn;on ròu;ad,kr

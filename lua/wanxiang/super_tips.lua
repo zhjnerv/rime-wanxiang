@@ -21,6 +21,8 @@ local DB_FORMAT_VERSION = "1"
 local DEFAULT_PRESET = "lua/data/tips_show.txt"
 local DEFAULT_USER = "lua/data/tips_user.txt"
 
+local runtime_load_state = {}
+
 local META_KEY = {
     version = "db_format_version",
     disabled_types = "disabled_types_fingerprint",
@@ -136,16 +138,22 @@ local function init_database(config)
     local disabled_fingerprint = table.concat(disabled_keys, "|")
 
     local files = {}
-    local files_list = config:get_list("super_tips/files")
 
+    -- 支持数组
+    local files_list = config:get_list("super_tips/files")
     if files_list then
         for i = 0, files_list.size - 1 do
             local entry = files_list:get_value_at(i)
-            local value = entry and entry.value
-
+            local value = entry and entry:get_string()
             if value and value ~= "" then
                 files[#files + 1] = value
             end
+        end
+    else
+        -- 支持单个字符串
+        local file_str = config:get_string("super_tips/files")
+        if file_str and file_str ~= "" then
+            files[#files + 1] = file_str
         end
     end
 
@@ -158,6 +166,10 @@ local function init_database(config)
         return nil
     end
 
+    if runtime_load_state[db_name] then
+        return db, db_name
+    end
+
     local signature = generate_files_signature(files)
     local db_version = db:meta_fetch(META_KEY.version) or ""
     local db_disabled = db:meta_fetch(META_KEY.disabled_types) or ""
@@ -168,6 +180,7 @@ local function init_database(config)
         or db_signature ~= signature
 
     if not needs_rebuild then
+        runtime_load_state[db_name] = true
         return db, db_name
     end
 
@@ -188,8 +201,7 @@ local function init_database(config)
     then
         return nil
     end
-
-    collectgarbage("collect")
+    runtime_load_state[db_name] = true
     return db, db_name
 end
 
@@ -270,13 +282,6 @@ local P = {}
 
 -- 初始化处理器、数据库引用和提示更新通知器。
 function P.init(env)
-    if env.tips_update_connection then
-        env.tips_update_connection:disconnect()
-        env.tips_update_connection = nil
-    end
-
-    release_database(env)
-
     local config = env.engine.schema.config
     env.tips_db, env.tips_db_name = init_database(config)
     env.tips_key = config:get_string("super_tips/tips_key")
@@ -309,7 +314,7 @@ function P.func(key, env)
     if not context:get_option("super_tips")
         or not env.tips_key
         or env.tips_key ~= key:repr()
-        or wanxiang.is_function_mode_active(context)
+        or wanxiang.is_function_mode(context)
         or not env.current_tip
         or env.current_tip == ""
     then

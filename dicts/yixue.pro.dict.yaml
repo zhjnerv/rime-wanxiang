@@ -7,6 +7,8 @@ name: yixue
 version: "LTS"
 sort: by_weight
 ...
+疰夏	zhù;bv xià;wz,aw	140
+疰夏病	zhù;bv xià;wz,aw bìng;bb	50
 输卵管癌	shū;iy luǎn;pd,md guǎn;vg ái;bu	486
 输卵管襞	shū;iy luǎn;pd,md guǎn;vg bì;yb,yx	45
 输卵管端	shū;iy luǎn;pd,md guǎn;vg duān;le	117
@@ -638,6 +640,7 @@ sort: by_weight
 儿童崩解症	ér;pg tóng;ll bēng;up jiě;jn zhèng;bv	10
 耳蜗神经核	ěr;aa wō;ig,in shén;uu jīng;sg hé;mh	10
 耳下淋巴结	ěr;aa xià;ab,ad lín;dl bā;ag jié;sj	10
+2型糖尿病	èr;aa xíng;tx táng;mt niào;uu bìng;bb	10
 耳牙综合征	ěr;aa yá;ap zōng;sz hé;rk zhēng;xv	10
 耳咽鼓管炎	ěr;aa yàn;ky gǔ;vd,uv guǎn;vg yán;hh	10
 耳源性脑炎	ěr;aa yuán;dy xìng;xu nǎo;ox yán;hh	10
@@ -4219,8 +4222,6 @@ sort: by_weight
 型淋巴细胞	xíng;tx lín;dl bā;ag xì;st bāo;ob	10
 性染色体病	xìng;xu rǎn;mg,mj sè;db tǐ;rb bìng;bb	10
 性索间质瘤	xìng;xu suǒ;sb,us jiān;mo,om zhì;bu,pb liú;bl	10
-1型糖尿病	xíng;tx táng;mt niào;uu bìng;bb	10
-2型糖尿病	xíng;tx táng;mt niào;uu bìng;bb	10
 行销近视症	xíng;xd,xi xiāo;jx jìn;zj shì;ju,uj zhèng;bv	10
 星形细胞瘤	xīng;ou xíng;pk xì;st bāo;ob liú;bl	10
 性欲低下症	xìng;xu yù;qg,gq dī;rd xià;ab,ad zhèng;bv	10
@@ -4545,6 +4546,7 @@ sort: by_weight
 胰腺移植术	yí;oy xiàn;oq yí;hd zhí;mv shù;md	10
 胰腺游离术	yí;oy xiàn;oq yóu;dz lí;ws,wl shù;md	10
 胰腺造影术	yí;oy xiàn;oq zào;zg yǐng;pj shù;md	10
+1型糖尿病	yī;aa xíng;tx táng;mt niào;uu bìng;bb	10
 一型糖尿病	yì;aa xíng;tx táng;mt niào;uu bìng;bb	10
 移行细胞癌	yí;hd xíng;xd,xi xì;st bāo;ob ái;bu	10
 异型吸虫病	yì;cs,sc xíng;tx xī;kj chóng;ad,vd bìng;bb	10

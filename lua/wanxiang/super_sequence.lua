@@ -22,7 +22,8 @@ local DEFAULT_SEQ_KEY = {
     pin = "Control+p",
 }
 
-local MAX_SORT_CANDIDATES = 500
+local MAX_SORT_CANDIDATES = 100
+local DB_POSITION_LIMIT = 500
 local POSITION_BASE = 512
 local TOMBSTONE_SLOT = 511
 local C_MAX = 2147483000
@@ -117,9 +118,9 @@ local function decode_state(commits)
     local slot = magnitude % POSITION_BASE
 
     if commits < 0 then return version, nil, false end
-    if slot < 1 or slot > MAX_SORT_CANDIDATES then return version, nil, false end
+    if slot < 1 or slot > DB_POSITION_LIMIT then return version, nil, false end
 
-    local position = MAX_SORT_CANDIDATES + 1 - slot
+    local position = DB_POSITION_LIMIT + 1 - slot
     return version, position, true
 end
 
@@ -133,9 +134,9 @@ end
 
 local function encode_active(version, position)
     version = math.max(1, math.min(MAX_VERSION, tonumber(version) or 1))
-    position = math.max(1, math.min(MAX_SORT_CANDIDATES, tonumber(position) or 1))
+    position = math.max(1, math.min(DB_POSITION_LIMIT, tonumber(position) or 1))
 
-    local slot = MAX_SORT_CANDIDATES + 1 - position
+    local slot = DB_POSITION_LIMIT + 1 - position
     return version * POSITION_BASE + slot
 end
 
@@ -245,7 +246,7 @@ local function load_input_records(state, input)
     end
 
     local records = {}
-    local has_active = false
+    local active_count = 0
     local prefix = input .. RECORD_SEPARATOR
     local prefix_len = #prefix
     local accessor = state.db:query(prefix)
@@ -265,13 +266,12 @@ local function load_input_records(state, input)
                 records[item] = {
                     commits = commits,
                     tick = tick,
-                    tail = tail,
                     version = version,
                     position = position,
                     active = active,
                 }
 
-                if active then has_active = true end
+                if active then active_count = active_count + 1 end
             end
         end
 
@@ -280,7 +280,8 @@ local function load_input_records(state, input)
 
     cached = {
         records = records,
-        has_active = has_active,
+        active_count = active_count,
+        has_active = active_count > 0,
     }
     touch_cached_entry(state, cached)
 
@@ -288,32 +289,35 @@ local function load_input_records(state, input)
     state.cache_size = state.cache_size + 1
     trim_record_cache(state)
 
-    return records, has_active
+    return records, active_count > 0
 end
 
-local function update_cached_record(state, input, item, commits, tick, tail)
+local function update_cached_record(state, input, item, commits, tick)
     local cached = state.cache[input]
     if not cached then return end
 
     touch_cached_entry(state, cached)
+    local old_record = cached.records[item]
+    local old_active = old_record and old_record.active or false
     local version, position, active = decode_state(commits)
 
     cached.records[item] = {
         commits = commits,
         tick = tick,
-        tail = tail,
         version = version,
         position = position,
         active = active,
     }
 
-    cached.has_active = false
-    for _, record in pairs(cached.records) do
-        if record.active then
-            cached.has_active = true
-            break
+    if old_active ~= active then
+        if active then
+            cached.active_count = cached.active_count + 1
+        else
+            cached.active_count = math.max(0, cached.active_count - 1)
         end
     end
+
+    cached.has_active = cached.active_count > 0
 end
 
 local function write_active_position(state, input, item, position, records)
@@ -329,13 +333,12 @@ local function write_active_position(state, input, item, position, records)
     local tail = make_record_tail(commits, tick)
     if not tail or not state.db:update(raw_key, tail) then return false end
 
-    update_cached_record(state, input, item, commits, tick, tail)
+    update_cached_record(state, input, item, commits, tick)
     records[item] = state.cache[input]
         and state.cache[input].records[item]
         or {
             commits = commits,
             tick = tick,
-            tail = tail,
             version = version,
             position = position,
             active = true,
@@ -356,13 +359,12 @@ local function write_reset_tombstone(state, input, item, records)
     local tail = make_record_tail(commits, record.tick)
     if not tail or not state.db:update(raw_key, tail) then return false end
 
-    update_cached_record(state, input, item, commits, record.tick, tail)
+    update_cached_record(state, input, item, commits, record.tick)
     records[item] = state.cache[input]
         and state.cache[input].records[item]
         or {
             commits = commits,
             tick = record.tick,
-            tail = tail,
             version = version,
             position = nil,
             active = false,
@@ -552,10 +554,6 @@ local function apply_current_adjustment(state, input, entries, records)
         table.insert(entries, to_position, candidate)
     end
 
-    for position, entry in ipairs(entries) do
-        entry.final_position = position
-    end
-
     if curr_state.is_reset_mode() then
         -- 重置只删除当前候选的手动状态。
         write_reset_tombstone(state, input, selected_key, records)
@@ -571,12 +569,13 @@ local function apply_current_adjustment(state, input, entries, records)
         )
     end
 
-    if moved then
-        -- 仅修正此前就有手动记录、这次又被当前操作挤动的候选。
-        -- 从未主动排序过的普通候选只在内存中自然让位，不落库。
-        for position, entry in ipairs(entries) do
-            local key = entry.sort_key
+    -- 同一轮同时更新最终位置，并在发生移动时修正此前已有手排记录的候选，
+    -- 避免对 entries 再做一轮完整扫描。普通候选被动让位仍不落库。
+    for position, entry in ipairs(entries) do
+        entry.final_position = position
 
+        if moved then
+            local key = entry.sort_key
             if key ~= selected_key and active_before[key] then
                 persist_entry_position(
                     state,
@@ -646,7 +645,7 @@ function P.func(key_event, env)
     local pin = seq_keys.pin
     local is_ctrl_key = code == 0xffe3 or code == 0xffe4
 
-    if wanxiang.is_function_mode_active(context) then
+    if wanxiang.is_function_mode(context) then
         curr_state.reset()
         return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
@@ -737,6 +736,15 @@ function F.init(env)
 end
 
 function F.fini(env)
+    local shared = _G.WanxiangSharedState
+    if shared then
+        shared.sorter_active = false
+        shared.last_input = ""
+        if shared.page_cache then
+            clear_array(shared.page_cache)
+        end
+    end
+
     env.symbol = nil
     env.page_size = nil
     release_sequence_state(env)
@@ -762,7 +770,7 @@ function F.func(input, env)
 
     local cache_limit = (env.page_size or 5) * 2
 
-    if wanxiang.is_function_mode_active(context) then
+    if wanxiang.is_function_mode(context) then
         curr_state.reset()
         return yield_original_list(input, has_symbol, cache_limit, page_cache)
     end
@@ -808,9 +816,7 @@ function F.func(input, env)
             entries[#entries + 1] = {
                 cand = candidate,
                 phrase = text,
-                sort_key = is_function_mode
-                    and tostring(raw_position - 1)
-                    or text,
+                sort_key = text,
                 raw_position = raw_position,
                 final_position = raw_position,
             }
@@ -826,7 +832,7 @@ function F.func(input, env)
         entry.final_position = position
         local candidate = entry.cand
 
-        if show_markers and not is_function_mode then
+        if show_markers then
             local record = records[entry.sort_key]
 
             if record and record.active then
@@ -853,7 +859,7 @@ function F.func(input, env)
         yield(candidate)
     end
 
-    -- 第 501 个及之后的候选不参与排序，保持上游顺序继续惰性透传。
+    -- 第 101 个及之后的候选不参与排序，保持上游顺序继续惰性透传。
     while true do
         local candidate = iterator(iterator_state, iterator_control)
         iterator_control = candidate

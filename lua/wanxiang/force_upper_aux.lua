@@ -76,23 +76,25 @@ function ForceUpperAux.init(env)
     env.on_update = function(ctx)
         ctx = ctx or env.engine.context
         if not ctx then return end
-        -- 非正常拼音输入时立刻放行，防止移动端键盘卡死
         local raw_in = ctx.input or ""
-        if raw_in == "" or not raw_in:match("^[a-zA-Z0-9]") then
-            return
-        end
-        -- 遇到转换模式或功能面板时立刻放行
-        local is_special_mode = wanxiang.s2t_conversion and wanxiang.s2t_conversion(ctx)
-        if env.is_cycling or wanxiang.is_function_mode_active(ctx) or is_special_mode then 
-            return 
-        end
-        
-        if not ctx:is_composing() then 
+
+        -- 一个完整输入周期结束后清空本周期状态，避免上一周期的“第一印象”残留。
+        if not ctx:is_composing() or raw_in == "" then
             env.history_first = {}
             env.press_count = 0
-            env.is_cycling = false 
+            env.is_cycling = false
             env.last_cand_len = 0
-            return 
+            return
+        end
+
+        -- 非正常拼音输入时立刻放行，防止移动端键盘卡死
+        if not raw_in:match("^[a-zA-Z0-9]") then
+            return
+        end
+
+        -- 遇到转换模式或功能面板时立刻放行
+        if wanxiang.is_special_mode(ctx) then
+            return
         end
         
         local parts = get_script_text_parts(ctx)
@@ -146,14 +148,21 @@ function ForceUpperAux.func(key_event, env)
         return 2 
     end
     
-    -- 拦截转换状态
-    local is_special_mode = wanxiang.s2t_conversion and wanxiang.s2t_conversion(ctx)
-    if wanxiang.is_function_mode_active(ctx) or is_special_mode then 
-        return 2 
+    local current_key = key_event:repr()
+
+    -- BackSpace 优先解除锁定
+    if current_key == "BackSpace" and env.is_cycling then
+        if env.original_input ~= "" then ctx.input = env.original_input end
+        env.press_count = 0
+        env.is_cycling = false
+        return 1
     end
 
-    local current_key = key_event:repr()
-    
+    -- 拦截特殊模式
+    if wanxiang.is_special_mode(ctx) then 
+        return 2
+    end
+
     if current_key == env.trigger_key then
         if not ctx:is_composing() then return 2 end
         
@@ -221,9 +230,6 @@ function ForceUpperAux.func(key_event, env)
         if new_input ~= ctx.input then ctx.input = new_input end
         return 1 
         
-    elseif current_key == "BackSpace" and env.is_cycling then
-        if env.original_input ~= "" then ctx.input = env.original_input end
-        env.press_count = 0; env.is_cycling = false; return 1
     else
         env.press_count = 0; env.is_cycling = false; return 2 
     end

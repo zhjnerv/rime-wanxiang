@@ -33,6 +33,21 @@ local function clear_map(t)
     for k in pairs(t) do t[k] = nil end
 end
 
+-- 释放当前组件持有的 notifier 与 ReverseDb；init 重入和 fini 共用。
+local function release_runtime(env)
+    if env.opt_update_conn then
+        pcall(function() env.opt_update_conn:disconnect() end)
+        env.opt_update_conn = nil
+    end
+
+    local db = env.charset_db
+    env.charset_db = nil
+
+    if db and db.close then
+        pcall(function() db:close() end)
+    end
+end
+
 -- 将字符集属性字符串转换为位掩码。
 local function str_to_mask(s)
     if not s or s == "" then return 0 end
@@ -221,8 +236,8 @@ local function get_active_rules(env, ctx)
     local filters = env.filters
     if not filters or #filters == 0 then return nil end
 
-    if wanxiang and wanxiang.s2t_conversion
-        and wanxiang.s2t_conversion(ctx)
+    if wanxiang and wanxiang.is_special_mode
+        and wanxiang.is_special_mode(ctx)
     then
         return nil
     end
@@ -318,17 +333,7 @@ end
 
 -- 断开选项监听并释放数据库和缓存引用。
 function M.fini(env)
-    if env.opt_update_conn then
-        env.opt_update_conn:disconnect()
-        env.opt_update_conn = nil
-    end
-
-    local db = env.charset_db
-    env.charset_db = nil
-
-    if db and db.close then
-        pcall(function() db:close() end)
-    end
+    release_runtime(env)
 
     env.charset_db_checked = nil
     env.db_memo = nil
