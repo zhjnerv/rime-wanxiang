@@ -23955,6 +23955,7 @@ sort: by_weight
 釯	máng;jw	38
 哤	máng;kl,km	38
 蛖	máng;il,im	23
+𬲹	māng;	3
 硥	mǎng;ul,um	1
 浝	máng;dl,dm	1
 𩷶	máng;ym	1
@@ -28571,6 +28572,7 @@ sort: by_weight
 器	qì;kk,qk	19132
 齐	qí;wa,wp	11441
 起	qǐ;zj	10868
+骑	qí;mq	9749
 祁	qí;eu,ue	1946
 期	qī;oq,qo	933
 戚	qī;gx,wx	926
@@ -28580,7 +28582,6 @@ sort: by_weight
 启	qǐ;hk,kh	811
 弃	qì;cw,wc	799
 旗	qí;fq	767
-骑	qí;mq	749
 棋	qí;mq	746
 欺	qī;qq	727
 歧	qí;vv	645
@@ -40280,11 +40281,11 @@ sort: by_weight
 𪂼	xiāng;nx,xn	1
 𣚺	xiàng;wm	1
 小	xiǎo;ad	305330
-效	xiào;wj	3542
+笑	xiào;vy	39452
+效	xiào;wj	13542
 消	xiāo;dx	3305
 校	xiào;mj	3238
 销	xiāo;jx	2582
-笑	xiào;vy	2452
 晓	xiǎo;oy	781
 肖	xiào;ox,xo	741
 孝	xiào;zl,lz	703
@@ -43003,6 +43004,8 @@ sort: by_weight
 咉	yāng;ky	33
 玚	yáng;wy	29
 详	yáng;yy	25
+䱀	yāng;yy	4
+𫚐	yāng;	3
 懩	yǎng;xy	1
 雵	yāng;yy	1
 慃	yǎng;xw	1
@@ -43050,7 +43053,6 @@ sort: by_weight
 䬺	yàng;uy	1
 䭐	yàng;uy	1
 䭥	yàng;uy	1
-䱀	yāng;yy	1
 䵮	yàng;hy	1
 𠍵	yàng;ry	1
 𠢴	yǎng;lh,pl	1
@@ -43501,6 +43503,7 @@ sort: by_weight
 鎁	yé;jy	23
 瞸	yè;om	23
 驜	yè;my	23
+𬲼	yè;	3
 曗	yè;ow,oy	1
 漜	yě;dt,dy	1
 枽	yè;mc	1
@@ -46266,6 +46269,7 @@ sort: by_weight
 园	yuán;ky	3489
 愿	yuàn;xy	3314
 圆	yuán;ky	1188
+媛	yuán;ny	1120
 援	yuán;fy	747
 怨	yuàn;xe,xy	742
 苑	yuàn;ce,cy	729
@@ -46323,7 +46327,6 @@ sort: by_weight
 轅	yuán;iy	133
 鋺	yuǎn;jw	133
 圜	yuán;kh,ky	124
-媛	yuán;ny	120
 猨	yuán;qy	115
 囦	yuān;ku	111
 謜	yuán;yy	106
