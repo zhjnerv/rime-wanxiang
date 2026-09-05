@@ -79,12 +79,11 @@ $IsUpdateModel = $true
 $InputSchemaType = "6";
 
 # 设置自动更新时要跳过的文件列表，配置好后删除注释符号
-$SkipFiles = @(
-    "wanxiang_symbols.yaml",
-    "weasel.yaml",
-    "others.txt",
-    "super_sequence.lua"
-);
+# $SkipFiles = @(
+#     "wanxiang_symbols.yaml",
+#     "weasel.yaml",
+#     "others.txt"
+# );
 
 # 设置代理地址和端口，配置好后删除注释符号
 # $proxyAddress = "http://127.0.0.1:7897"
