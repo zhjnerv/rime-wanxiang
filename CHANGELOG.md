@@ -1,5 +1,17 @@
 # Changelog
 
+## [17.9.9](https://github.com/amzxyz/rime-wanxiang/compare/v17.9.8...v17.9.9) (2026-09-05)
+
+
+### 📚 词库更新
+
+* 词库调整 ([1e09fa2](https://github.com/amzxyz/rime-wanxiang/commit/1e09fa23bbc1ba2857c38a3eab949299b6f95cfd))
+
+
+### 🏡 杂项
+
+* 群号放置文档末尾 ([60ca37a](https://github.com/amzxyz/rime-wanxiang/commit/60ca37ab2378ddf650a1e10a9f8a436a6b5e9743))
+
 ## [17.9.8](https://github.com/amzxyz/rime-wanxiang/compare/v17.9.7...v17.9.8) (2026-09-05)
 
 
