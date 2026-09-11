@@ -190,9 +190,6 @@ local function release_sequence_state(env)
     if not env then return end
     env.sequence_state = nil
     env.sequence_db_name = nil
-
-    -- DbAccessor 没有显式析构接口。所有局部访问器先置空，再执行一次
-    -- 完整垃圾回收，确保其先于所引用的 LevelDb 释放。
     collectgarbage()
 end
 
@@ -256,9 +253,6 @@ local function load_input_records(state, input)
             if raw_key:find(prefix, 1, true) ~= 1 then break end
 
             local item = raw_key:sub(prefix_len + 1)
-
-            -- 旧格式 value 会以 i=... 开头；它已经迁移并写成墓碑，
-            -- 不再进入新的候选位置表。
             if item and item ~= "" and not item:match("^i=.- p=") then
                 local commits, tick = parse_record_tail(tail)
                 local version, position, active = decode_state(commits)
@@ -274,9 +268,9 @@ local function load_input_records(state, input)
                 if active then active_count = active_count + 1 end
             end
         end
-
-        accessor = nil
     end
+
+    accessor = nil
 
     cached = {
         records = records,
@@ -619,16 +613,11 @@ local function process_adjustment(context)
     curr_state.selected_phrase = candidate and candidate.text or nil
     context:refresh_non_confirmed_composition()
 
-    if curr_state.highlight_index and curr_state.highlight_index >= 0 then
-        if context.highlight then
-            pcall(function() context:highlight(curr_state.highlight_index) end)
-        end
-        if not context.composition:empty() then
-            local segment = context.composition:back()
-            if segment then
-                segment.selected_index = curr_state.highlight_index
-            end
-        end
+    if context.highlight
+        and curr_state.highlight_index
+        and curr_state.highlight_index >= 0
+    then
+        context:highlight(curr_state.highlight_index)
     end
 end
 
@@ -655,8 +644,22 @@ function P.func(key_event, env)
         return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
 
-    -- 忽略单独按下或释放 Ctrl 键，避免破坏当前已选中的候选高亮焦点
+    -- Ctrl 监听，用于开关可视化标记。
     if is_ctrl_key then
+        if context.composition:empty() then
+            return wanxiang.RIME_PROCESS_RESULTS.kNoop
+        end
+
+        local current = context:get_option("_seq_show_markers")
+        local target = not key_event:release()
+
+        if current ~= target then
+            local segment = context.composition:back()
+            curr_state.highlight_index = segment.selected_index
+            context:set_option("_seq_show_markers", target)
+            process_adjustment(context)
+        end
+
         return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
 
@@ -768,6 +771,11 @@ function F.func(input, env)
 
     local adjust_code = context.input:sub(1, context.caret_pos)
     if adjust_code == "" then
+        return yield_original_list(input, has_symbol, cache_limit, page_cache)
+    end
+
+    -- 单个小写字母不参与手动排序；Filter 也直接透传，避免进入 sequence DB 查询。
+    if is_single_lowercase_letter(adjust_code) then
         return yield_original_list(input, has_symbol, cache_limit, page_cache)
     end
 
