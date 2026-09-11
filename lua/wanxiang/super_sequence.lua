@@ -613,7 +613,7 @@ local function process_adjustment(context)
     curr_state.selected_phrase = candidate and candidate.text or nil
     context:refresh_non_confirmed_composition()
 
-    if curr_state.highlight_indexand curr_state.highlight_index >=0 then
+    if curr_state.highlight_index and curr_state.highlight_index >=0 then
         if context.highlight then
             pcall(function() context:highlight(curr_state.highlight_index) end)
         end
