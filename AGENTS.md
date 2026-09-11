@@ -337,6 +337,19 @@ texlua -e 'assert(loadfile("path/to/file.lua"))'
 
 涉及 Candidate、Memory、DB、translator、notifier 或 context 的修改，需要结合实际 Rime 环境验证。
 
+## 上游同步与多机维护
+
+本项目是多机部署仓库，分支与同步约定如下：
+
+* `upstream-zrm` 跟踪上游 `amzxyz/rime-wanxiang` 的 `wanxiang-zrm-fuzhu`（自然码 PRO 分包）分支，作为同步基准；主线 `wanxiang` 仅作热修来源（cherry-pick），不计入同步基准。
+* `master` 是实际部署分支（个人配置、脚本、Lua 补丁、本地数据均在 master 上）。
+* 同步 = 以 `upstream-zrm` 为对照基准做 diff/restore，并排除本地自有文件（`docs/*`、`*.ps1`、`weasel_*.yaml`、`userzhj.dict.yaml`、`*.custom.yaml` 等**；上游改名/删除按 `git diff -M --name-status` 识别.**
+* `lua/wanxiang/super_sequence.lua` 采用「上游版 + 重放本地 Ctrl 补丁」：补丁 = `git diff 1751614 80c32a8 -- lua/wanxiang/super_sequence.lua`（用 cmd 重定向落盘再 `git apply`，PowerShell 管道会改换行导致失败**。
+* **重放 Ctrl 补丁后必须做 Lua 语法检查**（`luac -p` 或人工核对 `and` 两侧空格）——该补丁曾因 `highlight_indexand` 少空格导致输入法整体无法出中文候选。
+* `lua/custom_en_punct.lua` 为本地保留文件（上游已删但本地配置仍在引用**，不得随上游清理删除。
+* 发布 = 维护机 `git push rime-wx master:main`，其他电脑 `git pull --ff-only rime-wx main` 后托盘重新部署即成。.
+
+
 ## Python and Shell Rules
 
 修改 Python：
