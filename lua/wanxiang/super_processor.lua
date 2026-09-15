@@ -2,13 +2,11 @@
 -- @amzxyz
 -- https://github.com/amzxyz/rime-wanxiang
 -- 全能按键处理器：整合 KP小键盘、字母选词、符号快打、超强分词、重复限制、退格限制、声调回退、以词定字
--- 
+--
 -- 用法: 在 schema.yaml 中 engine/processors 列表添加 - lua_processor@*super_processor
 
 local wanxiang = require("wanxiang/wanxiang")
 local M = {}
-
-local K_REJECT, K_ACCEPT, K_NOOP = 0, 1, 2
 
 -- 1. 全局常量定义 (Constants)
 
@@ -324,11 +322,10 @@ function M.init(env)
     env.kp_func_matchers = load_rime_regex_matchers(config, "recognizer/patterns")
 
     -- [LetterSelector] 字母选词状态位
-    env.ls_active = false 
+    env.ls_active = false
 
     -- [ToneFallback] 声调容错
     env.tone_state = "idle"
-    env.lookup_key = config:get_string('wanxiang_lookup/key') or '`'
 
     -- [QuickSymbol] 符号快打
     env.qs_trigger = "^([a-z])/$"
@@ -372,7 +369,7 @@ function M.init(env)
         -- A. [ToneFallback] 执行声调压缩
         if env.enable_tone_fallback then
             local t_state = env.tone_state or "idle"
-            env.tone_state = "idle" 
+            env.tone_state = "idle"
 
             if t_state == "compress" and input ~= "" then
                 local caret = (ctx.caret_pos ~= nil) and ctx.caret_pos or #input
@@ -461,7 +458,7 @@ local function handle_predict_space(key, env, ctx)
     if (not ctx:is_composing() or ctx.input == "") and ctx:has_menu() then
         env.pending_predict_space = true
         ctx:set_option("_dummy_predict_update", true)
-        return true 
+        return true
     end
     return false
 end
@@ -471,7 +468,7 @@ local function handle_segmentation(key, env, ctx)
 
     if key.keycode ~= string.byte(env.seg_manual_delim) then
         env.seg_core, env.seg_start_idx, env.seg_N, env.seg_base = nil, nil, nil, nil
-        return false 
+        return false
     end
     if ctx.composition:empty() then return false end
 
@@ -524,7 +521,7 @@ local function handle_segmentation(key, env, ctx)
 
     if tlen == 1 then
         ctx.input = after
-        return true 
+        return true
     end
 
     if not conf then
@@ -538,11 +535,11 @@ local function handle_segmentation(key, env, ctx)
     local function restore()
         ctx.input = (env.seg_base or head) .. md
         env.seg_core, env.seg_start_idx, env.seg_N, env.seg_base = nil, nil, nil, nil
-        env.seg_core = core; env.seg_N = N 
+        env.seg_core = core; env.seg_N = N
     end
 
     if env.seg_start_idx and env.seg_start_idx ~= 0 then
-        local cycle_len = m 
+        local cycle_len = m
         local r = k % cycle_len
         if r == 0 then restore(); return true end
         local idx = ((env.seg_start_idx - 1 + r) % m) + 1
@@ -751,7 +748,8 @@ local function handle_number_logic(key, env, ctx)
                 end
             end
 
-            if input:find(env.lookup_key, 1, true) or is_func_mode or is_first_cand_has_eng then
+            -- 不再根据反查前缀禁用声调回退，反查模式与普通输入一致。
+            if is_func_mode or is_first_cand_has_eng then
                 env.tone_state = "idle"
             else
                 env.tone_state = "compress"
@@ -802,53 +800,53 @@ function M.func(key, env)
     local ctx = env.engine.context
 
     -- 1. 优先处理按键释放
-    if key:release() then 
+    if key:release() then
         handle_backspace(key, env, ctx)
-        return K_NOOP 
+        return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
 
     local kc = key.keycode
 
     -- [Predict Space] 联想空格
     if kc == 0x20 then
-        if handle_predict_space(key, env, ctx) then return K_ACCEPT end
+        if handle_predict_space(key, env, ctx) then return wanxiang.RIME_PROCESS_RESULTS.kAccepted end
     end
 
     -- 2. QuickSymbol 拦截 (a-z + /)
     if handle_quick_symbol_intercept(key, env, ctx) then
-        return K_ACCEPT
+        return wanxiang.RIME_PROCESS_RESULTS.kAccepted
     end
 
     -- 3. Backspace 退格防止删除已上屏内容
     if kc == 0xFF08 then
-        if handle_backspace(key, env, ctx) then return K_ACCEPT end
+        if handle_backspace(key, env, ctx) then return wanxiang.RIME_PROCESS_RESULTS.kAccepted end
     end
 
     -- 4. Select Character 以词定字 (New!)
     -- 它的优先级很高，因为是针对当前候选的操作
     -- 但必须在 Backspace 之后，防止误操作
     if handle_select_character(key, env, ctx) then
-        return K_ACCEPT
+        return wanxiang.RIME_PROCESS_RESULTS.kAccepted
     end
 
     -- 5. 分词符 ' [SuperSegmentation] 处理分词符 '
     if kc == 0x27 then
-        if handle_segmentation(key, env, ctx) then return K_ACCEPT end
+        if handle_segmentation(key, env, ctx) then return wanxiang.RIME_PROCESS_RESULTS.kAccepted end
     end
 
     -- 6. 字母键 (a-z)[Limit Repeated] 重复输入限制
     if kc >= 0x61 and kc <= 0x7A then
-        if handle_limit_repeat(key, env, ctx) then return K_ACCEPT end
+        if handle_limit_repeat(key, env, ctx) then return wanxiang.RIME_PROCESS_RESULTS.kAccepted end
     end
 
     -- 7. (q-o + 特定 Tag)[Letter Selector] 字母选词
     if env.ls_active and (LETTER_SEL_MAP[kc] ~= nil) then
-        if handle_letter_select(key, env, ctx) then return K_ACCEPT end
+        if handle_letter_select(key, env, ctx) then return wanxiang.RIME_PROCESS_RESULTS.kAccepted end
     end
 
     -- 8. 数字键 (小键盘 + 声调 + 选词)[KpNumber & ToneFallback] 数字键综合逻辑
     if (kc >= 0xFFB0 and kc <= 0xFFB9) or (kc >= 0x30 and kc <= 0x39) then
-        if handle_number_logic(key, env, ctx) then return K_ACCEPT end
+        if handle_number_logic(key, env, ctx) then return wanxiang.RIME_PROCESS_RESULTS.kAccepted end
     else
         -- 非数字键，重置声调状态
         if env.enable_tone_fallback then
@@ -856,6 +854,6 @@ function M.func(key, env)
         end
     end
 
-    return K_NOOP
+    return wanxiang.RIME_PROCESS_RESULTS.kNoop
 end
 return M

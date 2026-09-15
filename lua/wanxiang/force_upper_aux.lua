@@ -30,8 +30,8 @@ local function get_script_text_parts(ctx)
     if not vertices or #vertices < 2 then return parts end
 
     for i = 1, #vertices - 1 do
-        local start_byte = vertices[i] + 1 
-        local end_byte = vertices[i + 1]   
+        local start_byte = vertices[i] + 1
+        local end_byte = vertices[i + 1]
         local raw_syl = ctx.input:sub(start_byte, end_byte)
         if raw_syl and raw_syl ~= "" then
             table.insert(parts, raw_syl)
@@ -64,15 +64,15 @@ function ForceUpperAux.init(env)
     env.aux_cache = {}
     env.dict_name = config:get_string("translator/dictionary") or "wanxiang_pro"
     env.dict = nil
-    
-    env.history_first = {}   
-    env.press_count = 0      
-    env.is_cycling = false   
-    env.snapshot_parts = nil 
+
+    env.history_first = {}
+    env.press_count = 0
+    env.is_cycling = false
+    env.snapshot_parts = nil
     env.snapshot_current_full = ""
     env.original_input = ""
     env.last_cand_len = 0
-    
+
     env.on_update = function(ctx)
         ctx = ctx or env.engine.context
         if not ctx then return end
@@ -96,29 +96,29 @@ function ForceUpperAux.init(env)
         if wanxiang.is_special_mode(ctx) then
             return
         end
-        
+
         local parts = get_script_text_parts(ctx)
         local n = #parts
         if n == 0 then return end
-        
+
         local segment = ctx.composition:back()
         if not segment then return end
-        
+
         local cand = segment:get_candidate_at(0)
         if cand and cand.text then
             local cand_len = utf8.len(cand.text) or 0
-            
+
             -- 只有当候选词字数实质性变短时，才清理未来的记忆
             local last_len = env.last_cand_len or 0
             if cand_len < last_len then
                 for k in pairs(env.history_first) do
-                    if k > cand_len then 
-                        env.history_first[k] = nil 
+                    if k > cand_len then
+                        env.history_first[k] = nil
                     end
                 end
             end
             env.last_cand_len = cand_len
-            
+
             -- 记录当前长度的“第一印象”
             if not env.history_first[n] then
                 env.history_first[n] = get_utf8_prefix(cand.text, n)
@@ -139,15 +139,15 @@ end
 
 -- 核心逻辑
 function ForceUpperAux.func(key_event, env)
-    if key_event:release() then return 2 end
+    if key_event:release() then return wanxiang.RIME_PROCESS_RESULTS.kNoop end
     local ctx = env.engine.context
-    
+
     -- 拦截移动端的奇怪按键触发
     local raw_in = ctx.input or ""
-    if raw_in == "" or not raw_in:match("^[a-zA-Z0-9/]") then 
-        return 2 
+    if raw_in == "" or not raw_in:match("^[a-zA-Z0-9/]") then
+        return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
-    
+
     local current_key = key_event:repr()
 
     -- BackSpace 优先解除锁定
@@ -155,17 +155,17 @@ function ForceUpperAux.func(key_event, env)
         if env.original_input ~= "" then ctx.input = env.original_input end
         env.press_count = 0
         env.is_cycling = false
-        return 1
+        return wanxiang.RIME_PROCESS_RESULTS.kAccepted
     end
 
     -- 拦截特殊模式
-    if wanxiang.is_special_mode(ctx) then 
-        return 2
+    if wanxiang.is_special_mode(ctx) then
+        return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
 
     if current_key == env.trigger_key then
-        if not ctx:is_composing() then return 2 end
-        
+        if not ctx:is_composing() then return wanxiang.RIME_PROCESS_RESULTS.kNoop end
+
         if env.press_count == 0 then
             env.original_input = ctx.input
             env.snapshot_parts = get_script_text_parts(ctx)
@@ -177,37 +177,37 @@ function ForceUpperAux.func(key_event, env)
                 end
             end
         end
-        
+
         env.press_count = env.press_count + 1
-        env.is_cycling = true 
-        
+        env.is_cycling = true
+
         local parts = env.snapshot_parts
         local parts_count = #parts
         local candidate_text = ""
         local apply_until = 0
-        
+
         if env.press_count % 2 == 1 then
             candidate_text = env.snapshot_current_full
-            apply_until = parts_count 
+            apply_until = parts_count
         else
             apply_until = parts_count - 1
             if apply_until > 0 then
                 candidate_text = env.history_first[apply_until] or get_utf8_prefix(env.snapshot_current_full, apply_until)
             else
                 if env.original_input ~= "" then ctx.input = env.original_input end
-                return 1
+                return wanxiang.RIME_PROCESS_RESULTS.kAccepted
             end
         end
-        
+
         local new_input_parts = {}
         local text_len = utf8.len(candidate_text) or 0
-        local found_any_aux = false 
-        
+        local found_any_aux = false
+
         for i = 1, parts_count do
-            local syl = parts[i]:gsub("['%s]", "") 
+            local syl = parts[i]:gsub("['%s]", "")
             local pinyin_offset = utf8.offset(syl, 3)
             local pinyin = pinyin_offset and string.sub(syl, 1, pinyin_offset - 1) or syl
-            
+
             if i <= apply_until and i <= text_len then
                 local char = get_utf8_char(candidate_text, i)
                 local aux = lookup_aux_code(env, char)
@@ -223,15 +223,15 @@ function ForceUpperAux.func(key_event, env)
         end
 
         if not found_any_aux then
-            env.press_count = 0; env.is_cycling = false; return 2
+            env.press_count = 0; env.is_cycling = false; return wanxiang.RIME_PROCESS_RESULTS.kNoop
         end
 
         local new_input = table.concat(new_input_parts)
         if new_input ~= ctx.input then ctx.input = new_input end
-        return 1 
-        
+        return wanxiang.RIME_PROCESS_RESULTS.kAccepted
+
     else
-        env.press_count = 0; env.is_cycling = false; return 2 
+        env.press_count = 0; env.is_cycling = false; return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
 end
 
