@@ -4,13 +4,17 @@ patch:
       #- wanxiang_algebra:/模糊音_z_zh  # 这里取消注释启用，wanxiang_algebra.yaml文件末尾有具体条目，不含的custom自定义即可
       - wanxiang_algebra:/pro/自然码 # 可选输入方案名称：自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
       - wanxiang_algebra:/pro/直接辅助 #辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
+      - wanxiang_algebra:/26jian
+      #- wanxiang_algebra:/18jian
+      #- wanxiang_algebra:/14jian
       # ↑ 注意：librime 对 speller.algebra.__patch 是"替换"而非"追加"，不能依赖 schema 默认值；这三条都必须显式列出（2026-08-05 教训）
       - wanxiang_algebra:/自然码提权 #自然码提权，定义在wanxiang_algebra.yaml
   ##########################以上格式受指令初始化控制，最好保持格式不变，如果发生变更请不要使用指令修改相关数据#####################################
   
-  #通过下面的设置可以让你自己的文件引入而与仓库custom_phrase.txt不同，防止更新时被仓库文件覆盖
-  custom_phrase/user_dict: custom_phrase_double # 这里改成什么就需要手动创建同名的 custom_phrasexx.txt 文件在用户目录，这个文件主要用于置顶，编码为自定义编码的词汇
-  custom_phrase/enable_completion: false # 开启自定义短语补全功能，默认关闭
+  #18.0.5 起置顶词改为 dictionary 机制：指向根目录 custom_phrase_double.dict.yaml，与上游 custom_phrase.dict.yaml 隔离，更新不被覆盖
+  custom_phrase/dictionary: custom_phrase_double
+  custom_phrase/prism: custom_phrase_double
+  custom_phrase/enable_completion: false
   
   "engine/processors/@before 0": lua_processor@*custom_en_punct # 【自定义】独立标点转换，不随更新覆盖
   

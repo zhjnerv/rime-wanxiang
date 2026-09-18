@@ -1,0 +1,39 @@
+# Rime dictionary
+# encoding: utf-8
+#
+# 本文件由 custom_phrase_double.txt 迁移而来（2026-09-19，随上游 18.0.5 起
+# custom_phrase 机制由 user_dict txt 改为 dictionary 引用，见 lua/wanxiang/custom_phrase.lua）。
+# 格式：文本<Tab>编码<Tab>权重；动态占位符（\Y、\d、\n 等）与原 txt 一致，
+# 由 super_filter.lua 在候选输出时格式化。
+# 入口配置在 wanxiang_pro.custom.yaml：custom_phrase/dictionary: custom_phrase_double
+---
+name: custom_phrase_double
+version: "2026-09-19"
+sort: by_weight
+...
+ptd	ptd
+13173678927	dmh	1
+浙江省杭州市余杭区金恒路18号博多森谷2号楼4楼D-16 周豪靖 13173678927	div	1
+浙江省杭州市拱墅区小河路188号6幢3单元1402室 神经元 13173678927	div	2
+ptz	ptz
+cqy	cqy
+Dataview	dataview
+QuickAdd	quickadd
+zhjwork@gmail.com	zhjwork
+zhjwork	zhj
+qqdk2019.net	qqdk
+Omnivore	omni	2
+330103198301210755	vbhkj	2
+NPN	npn	2
+vikunja	viku	2
+aistudio	ai	3
+DAS	das	2
+OA	oa	1
+CPC	cpc	1
+PCT	pct	1
+斯可睿	sikerv	3
+杭州斯可睿专利事务所有限公司	sikerv	2
+账户名：杭州斯可睿专利事务所有限公司\n帐号：1202027709900192254\n开户行：中国工商银行杭州城站支行\n纳税人识别号：91330102589878077Q\n地址、电话：浙江省杭州市余杭区金恒路18号博多森谷2号楼4楼D-16\n支付宝账号：account@skrpat.com	sikerv	1
+斯可睿专利	sikervvr	3
+名称：杭州金汇知识产权代理有限公司\n税号：91330102673986812G\n营业地址及电话：杭州市余杭区五常街道文一西路998号1幢601B室 0571-28055898\n银行名称及帐号：中国农业银行杭州解放路支行 19025101040014216	jnhv	2
+\Y\m\d	rq	1
