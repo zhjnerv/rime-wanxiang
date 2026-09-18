@@ -1,0 +1,38 @@
+# Rime schema settings
+# encoding: utf-8
+schema:
+  schema_id: wanxiang_phrase_double
+  name: "万象：自定义词库转换（local custom_phrase_double）"
+  version: "LTS"
+  description: |
+    本地私有词库 custom_phrase_double 的部署用 schema（2026-09-19 随上游 18.0.5 建立）。
+    仅用于让部署器编译 build/custom_phrase_double.table.bin + custom_phrase_double.prism.bin，
+    供 wanxiang_pro.custom.yaml 中 custom_phrase/dictionary 指向；不加入 schema_list。
+engine:
+  processors:
+    - key_binder
+    - speller
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - abc_segmentor
+  translators:
+    - table_translator
+  filters:
+    - uniquifier
+
+key_binder:
+  __include: default:/key_binder?
+
+speller:
+  alphabet: "abcdefghijklmnopqrstuvwxyz;"
+  delimiter: " '"
+  algebra:
+    __patch:
+      - wanxiang_algebra:/26jian
+
+translator:
+  dictionary: custom_phrase_double
+  prism: custom_phrase_double
+  enable_user_dict: false
