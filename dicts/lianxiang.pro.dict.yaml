@@ -131,6 +131,7 @@ sort: by_weight
 爱巴鸟尾蛤	ài;vy bā;ag niǎo;na,pa wěi;um há;ih	10
 爱比克泰德	ài;vy bǐ;bb kè;eg,ux tài;fu,uf dé;xx	10
 爱彼女皇杯	ài;vy bǐ;xp nǚ;aa,vh huáng;bw bēi;mb	10
+爱博而心劳	ài;vy bó;uc,uf ér;aa xīn;dd láo;lb,cl	10
 爱不爱我吧	ài;vy bú;ad,ax ài;vy wǒ;pd,pp ba;kb	10
 爱不爱我吗	ài;vy bú;ad,ax ài;vy wǒ;pd,pp ma;km	10
 爱不再回来	ài;vy bú;ad,ax zài;aa,at huí;kk lái;am,wb	10
@@ -1157,6 +1158,7 @@ sort: by_weight
 八一三事变	bā;pd yī;aa sān;aa shì;aa biàn;wy,yy	10
 八一四空战	bā;pd yī;aa sì;aa,ke kōng;xg,bg zhàn;gv	10
 八一五光复	bā;pd yī;aa wǔ;aa guāng;ea,xw fù;rw,wo	10
+巴音浩日娲	bā;ag yīn;lo hào;dg rì;aa,or wā;ng,nn	10
 把银禧带来	bǎ;fb yín;jg xǐ;ux dài;jb lái;am,wb	10
 把油箱加满	bǎ;fb yóu;dy xiāng;vx jiā;lk,kl mǎn;dl	10
 八俣远吕智	bā;pd yǔ;rw yuǎn;zy lǚ;kk zhì;ov	10
@@ -3294,7 +3296,7 @@ sort: by_weight
 北越人民军	běi;ap,bj yuè;zy rén;pd mín;ag,vg jūn;bi	10
 备孕的夫妻	bèi;wt yùn;zn de;bu fū;ad,er qī;na,nq	10
 备孕的女性	bèi;wt yùn;zn de;bu nǚ;aa,vh xìng;xu	10
-被载入史册	bèi;yp zǎi;gi,ig rù;pd shǐ;ki,ad cè;ka,pa	10
+被载入史册	bèi;yp zài;gi,ig rù;pd shǐ;ki,ad cè;ka,pa	10
 被炸成碎片	bèi;yp zhà;hv chéng;gg,wg suì;uz piàn;pa,pv	10
 被占了便宜	bèi;yp zhàn;bk le;aa,vu pián;rg yi;bq	10
 北站派出所	běi;ap,bj zhàn;lv pài;dp chū;ck,aa suǒ;hj,jh	10
@@ -43538,9 +43540,9 @@ sort: by_weight
 漫湾水电站	màn;dm wān;dw shuǐ;ad,uv diàn;ag,og zhàn;lv	10
 漫威的电影	màn;dm wēi;gn,ng,wn de;bu diàn;ag,og yǐng;pj	10
 漫无目的地	màn;dm wú;ag,ay mù;aa dì;bu dì;ty	10
-满血复活了	mǎn;dl xiě;pa,pm fù;rw,wo huó;du le;aa,vu	10
 满心的欢喜	mǎn;dl xīn;dd de;bu huān;qy,yq xǐ;uk	10
 慢性病监测	màn;xm xìng;xu bìng;bb jiān;mv cè;dz	10
+满血复活了	mǎn;dl xuè;pa,pm fù;rw,wo huó;du le;aa,vu	10
 满眼的绿色	mǎn;dl yǎn;og de;bu lǜ;sl sè;db	10
 蔓叶类函数	màn;cm yè;ku lèi;md hán;ku,lk shù;wl	10
 蔓叶类曲线	màn;cm yè;ku lèi;md qū;aa,oa xiàn;sj	10
@@ -84710,6 +84712,7 @@ sort: by_weight
 再来些葱花	zài;aa,at lái;am,wb xiē;ec cōng;cc,cx huā;ch	10
 栽了大跟头	zāi;gm,mg le;aa,vu dà;ad gēn;zg tou;dd	10
 栽了个跟头	zāi;gm,mg le;aa,vu gè;ra,pa gēn;zg tou;dd	10
+甾类化合物	zāi;ti,it lèi;md huà;rb hé;rk wù;nw	10
 在冷战期间	zài;ta,ut lěng;dl zhàn;gv qī;oq,qo jiān;mo,om	10
 在理发店里	zài;ta,ut lǐ;wl fà;ay diàn;gv lǐ;aa,tt	10
 在离婚以后	zài;ta,ut lí;ws,wl hūn;nh yǐ;rd,ry hòu;pk	10
@@ -84785,7 +84788,7 @@ sort: by_weight
 在日外国人	zài;ta,ut rì;aa,or wài;xb guó;ky rén;pd	10
 在日中国人	zài;ta,ut rì;aa,or zhōng;aa,ka guó;ky rén;pd	10
 再入大气层	zài;aa,at rù;pd dà;ad qì;py,ry céng;uy	10
-载入了史册	zǎi;gi,ig rù;pd le;aa,vu shǐ;ki,ad cè;ka,pa	10
+载入了史册	zài;gi,ig rù;pd le;aa,vu shǐ;ki,ad cè;ka,pa	10
 在三环路上	zài;ta,ut sān;aa huán;wb lù;zg shàng;aa,ba	10
 宰桑纪念碑	zǎi;bx sāng;mr,mu,ym jì;sj niàn;xj bēi;ub	10
 在森林深处	zài;ta,ut sēn;ml lín;mm shēn;dm chù;wb	10
@@ -90420,7 +90423,6 @@ sort: by_weight
 自来水净化	zì;pa,po lái;am,wb shuǐ;ad,uv jìng;dv huà;rb	10
 自来水之污	zì;pa,po lái;am,wb shuǐ;ad,uv zhī;dd wū;dk	10
 自来也老师	zì;pa,po lái;am,wb yě;gg lǎo;bl,lb shī;ab,db	10
-甾类化合物	zī;ti,it lèi;md huà;rb hé;rk wù;nw	10
 子类型多态	zǐ;aa,vh lèi;md xíng;tx duō;xx tài;xt	10
 字里行间里	zì;bz lǐ;aa,tt háng;xd,xi jiān;mo,om lǐ;aa,tt	10
 字里行间中	zì;bz lǐ;aa,tt háng;xd,xi jiān;mo,om zhōng;aa,ka	10
@@ -92627,7 +92629,7 @@ sort: by_weight
 八大夜叉大将	bā;pd dà;ad yè;wd,ww chā;dy,yd dà;ad jiàng;pc,jc	10
 巴丹半岛战役	bā;ag dān;pd bàn;bf dǎo;nu,un zhàn;gv yì;xu	10
 坝道工程医院	bà;tb dào;zu gōng;aa chéng;hi yī;ku yuàn;ew	10
-霸道总裁范儿	bà;yo dào;zu zǒng;xk,bx cái;gy,yg fàn;ce,cf ér;pg	10
+霸道总裁范儿	bà;yo dào;zu zǒng;xk,bx cái;gy,yg fàn;ce,cf er;pg	10
 巴登符腾堡州	bā;ag dēng;dd fú;vf téng;om bǎo;tb zhōu;id,da	10
 巴登号铁甲舰	bā;ag dēng;dd hào;kk tiě;ju jiǎ;aa,oa jiàn;vj	10
 八点半的星光	bā;pd diǎn;hv bàn;bf de;bu xīng;ou guāng;ea,xw	10
@@ -109427,7 +109429,7 @@ sort: by_weight
 呼日勒巴特尔	hū;kh rì;aa,or lè;lg,gl bā;ag tè;ns ěr;dx,xd	10
 沪蓉高速公路	hù;dh róng;cr gāo;wk sù;zu gōng;sb,bs lù;zg	10
 沪瑞高速公路	hù;dh ruì;we gāo;wk sù;zu gōng;sb,bs lù;zg	10
-胡塞武装组织	hú;og sāi;tb,bt wǔ;vy,yv zhuāng;yv zǔ;sq zhī;sv	10
+胡塞武装组织	hú;og sài;tb,bt wǔ;vy,yv zhuāng;yv zǔ;sq zhī;sv	10
 胡桑实验学派	hú;og sāng;mr,mu,ym shí;bt yàn;ma,mq xué;zb,dz pài;dp	10
 沪陕高速公路	hù;dh shǎn;ej gāo;wk sù;zu gōng;sb,bs lù;zg	10
 笏山金矿事故	hù;vw shān;aa jīn;ra,pa kuàng;ug shì;aa gù;wg	10
@@ -115734,7 +115736,7 @@ sort: by_weight
 可以用中文吗	kě;dk yǐ;rd,ry yòng;kf zhōng;aa,ka wén;wi,dd ma;km	10
 可以游刃有余	kě;dk yǐ;rd,ry yóu;dz rèn;dd yǒu;ou,uo yú;rb	10
 可以预见未来	kě;dk yǐ;rd,ry yù;yy jiàn;ag,ek,ke wèi;ex,ad lái;am,wb	10
-可以载入史册	kě;dk yǐ;rd,ry zǎi;gi,ig rù;pd shǐ;ki,ad cè;ka,pa	10
+可以载入史册	kě;dk yǐ;rd,ry zài;gi,ig rù;pd shǐ;ki,ad cè;ka,pa	10
 可抑制张力丝	kě;dk yì;fe zhì;dg,dv zhāng;gi lì;gp sī;aa	10
 可以足不出户	kě;dk yǐ;rd,ry zú;kv bù;ad,ax chū;ck,aa hù;dp,du	10
 可以做得更好	kě;dk yǐ;rd,ry zuò;rg de;xc gèng;ad,ag hǎo;nz	10
@@ -121132,7 +121134,7 @@ sort: by_weight
 女神的圣斗士	nǚ;aa,vh shén;uu de;bu shèng;ty,yt dòu;du shì;aa	10
 女神的十字架	nǚ;aa,vh shén;uu de;bu shí;aa zì;bz jià;mj	10
 女神迪丽热巴	nǚ;aa,vh shén;uu dí;zy lì;ad rè;hv bā;ag	10
-女神范儿十足	nǚ;aa,vh shén;uu fàn;ce,cf ér;pg shí;aa zú;kv	10
+女神范儿十足	nǚ;aa,vh shén;uu fàn;ce,cf er;pg shí;aa zú;kv	10
 女神和女汉子	nǚ;aa,vh shén;uu hé;hk nǚ;aa,vh hàn;dy zi;aa,vh	10
 女生殖器结核	nǚ;aa,vh shēng;na zhí;dv qì;kk,qk jié;sj hé;mh	10
 女同性恋电影	nǚ;aa,vh tóng;kk xìng;xu liàn;xy,yx diàn;ag,og yǐng;pj	10
@@ -121142,7 +121144,7 @@ sort: by_weight
 女同性恋组织	nǚ;aa,vh tóng;kk xìng;xu liàn;xy,yx zǔ;sq zhī;sv	10
 女同性恋作家	nǚ;aa,vh tóng;kk xìng;xu liàn;xy,yx zuò;rv jiā;bu	10
 女娲炼石补天	nǚ;aa,vh wā;ng,nn liàn;hd,hj shí;pk,kp bǔ;yb tiān;ad	10
-女王范儿十足	nǚ;aa,vh wáng;aa fàn;ce,cf ér;pg shí;aa zú;kv	10
+女王范儿十足	nǚ;aa,vh wáng;aa fàn;ce,cf er;pg shí;aa zú;kv	10
 女王圣诞致辞	nǚ;aa,vh wáng;aa shèng;ty,yt dàn;yy zhì;wv cí;ux,xu	10
 女为悦己者容	nǚ;aa,vh wéi;dd yuè;xd jǐ;ag,vg zhě;lo,ol róng;bg	10
 女武神的餐桌	nǚ;aa,vh wǔ;vy,yv shén;uu de;bu cān;uy zhuō;mo,bm	10
@@ -130096,7 +130098,7 @@ sort: by_weight
 苏式社会主义	sū;cb shì;gy,yg shè;ut,tu huì;ry zhǔ;dw yì;di,id	10
 苏式鲜肉月饼	sū;cb shì;gy,yg xiān;yy ròu;ad,kr yuè;oy,pa bing;ub	10
 素食制作技艺	sù;sf,fs shí;rl,pd zhì;dg,dv zuò;rv jì;fv yì;cy	10
-素数倒数幻方	sù;sf,fs shù;wl dào;rd shǔ;wl huàn;yg fāng;dw	10
+素数倒数幻方	sù;sf,fs shù;wl dǎo;rd shù;wl huàn;yg fāng;dw	10
 素数计数函数	sù;sf,fs shù;wl jì;yu shù;wl hán;ku,lk shù;wl	10
 素数阶乘素数	sù;sf,fs shù;wl jiē;ej chéng;pb,hb sù;sf,fs shù;wl	10
 苏丝黄的世界	sū;cb sī;aa huáng;ad,cb de;bu shì;ca,cv jiè;tj	10
@@ -138667,8 +138669,8 @@ sort: by_weight
 叶绿基甲萘醌	yè;ku lǜ;sl jī;tq,qt jiǎ;aa,oa nài;cn kūn;yk	10
 野猫式战斗机	yě;ly,yl māo;qm shì;gy,yg zhàn;gv dòu;du jī;mj	10
 也门阿拉伯语	yě;gg mén;dg ā;ek lā;fl bó;rb yǔ;yw	10
-也门胡塞叛乱	yě;gg mén;dg hú;og sāi;tb,bt pàn;fb luàn;ug	10
-也门胡塞武装	yě;gg mén;dg hú;og sāi;tb,bt wǔ;vy,yv zhuāng;yv	10
+也门胡塞叛乱	yě;gg mén;dg hú;og sài;tb,bt pàn;fb luàn;ug	10
+也门胡塞武装	yě;gg mén;dg hú;og sài;tb,bt wǔ;vy,yv zhuāng;yv	10
 也门武装部队	yě;gg mén;dg wǔ;vy,yv zhuāng;yv bù;ek,ep duì;er	10
 夜幕降临之时	yè;wd,ww mù;jm,cj jiàng;ef,ej lín;ao,do zhī;dd shí;oc	10
 业内权威人士	yè;aa nèi;ad,kr quán;my wēi;gn,ng,wn rén;pd shì;aa	10
@@ -141471,7 +141473,7 @@ sort: by_weight
 雨夹雪转小雪	yǔ;ad jiā;fb,ar xuě;yx zhuǎn;iv xiǎo;ad xuě;yx	10
 宇迦之御魂神	yǔ;by jiā;zj zhī;dd yù;xx hún;gy,yg shén;uu	10
 预见方能遇见	yù;yy jiàn;ag,ek,ke fāng;dw néng;sb yù;zy jiàn;ag,ek,ke	10
-御姐范儿十足	yù;xx jiě;nq fàn;ce,cf ér;pg shí;aa zú;kv	10
+御姐范儿十足	yù;xx jiě;nq fàn;ce,cf er;pg shí;aa zú;kv	10
 预紧式安全带	yù;yy jǐn;sy shì;gy,yg ān;bn quán;rw dài;jb	10
 榆靖高速公路	yú;my jìng;lq gāo;wk sù;zu gōng;sb,bs lù;zg	10
 寓京师千佛寺	yù;by jīng;wx shī;ab,db qiān;pa fó;rf sì;ct,tc	10
@@ -146629,7 +146631,7 @@ sort: by_weight
 阻塞性肺不张	zǔ;eq sè;tb,bt xìng;xu fèi;of,oj bù;ad,ax zhāng;gi	10
 祖耶夫斯基区	zǔ;uq yé;ee fū;ad,er sī;jq,qj jī;tq,qt qū;ki	10
 族裔民族主义	zú;fu yì;yk mín;ag,vg zú;fu zhǔ;dw yì;di,id	10
-足以载入史册	zú;kv yǐ;rd,ry zǎi;gi,ig rù;pd shǐ;ki,ad cè;ka,pa	10
+足以载入史册	zú;kv yǐ;rd,ry zài;gi,ig rù;pd shǐ;ki,ad cè;ka,pa	10
 祖云达斯球员	zǔ;uq yún;es,se dá;zd sī;jq,qj qiú;wq yuán;kb	10
 组织胺性头痛	zǔ;sq zhī;sv àn;oa xìng;xu tóu;dd tòng;by	10
 阻止火势蔓延	zǔ;eq zhǐ;aa huǒ;dd shì;lv màn;cm yán;zv	10
@@ -159333,6 +159335,7 @@ sort: by_weight
 沙美特罗替卡松	shā;du měi;dy,yd tè;ns luó;sx tì;of,fo kǎ;bx,ub sōng;mg	10
 沙门不敬王者论	shā;du mén;dg bú;ad,ax jìng;wg,wj wáng;aa zhě;lo,ol lùn;yl	10
 莎普尿塞通片剂	shā;cu pǔ;ob,bo niào;uu sāi;tb,bt tōng;zy piàn;pa,pv jì;dq	10
+杀人不过头点地	shā;mi,im rén;pd bú;ad,ax guò;zc tóu;dd diǎn;hv dì;ty	10
 沙参麦冬饮豆桑	shā;du shēn;sp mài;fw dōng;wd yǐn;uq dòu;aa,aq sāng;mr,mu,ym	10
 沙参杞子麦冬襄	shā;du shēn;sp qǐ;mj zǐ;aa,vh mài;fw dōng;wd xiāng;wy,ya	10
 沙参玉竹老鸭汤	shā;du shēn;sp yù;ad,wd zhú;gg lǎo;bl,lb yā;nj,jn tāng;dy	10
