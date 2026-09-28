@@ -5094,7 +5094,6 @@ sort: by_weight
 不可达基数	bù;ad,ax kě;dk dá;zd jī;tq,qt shù;wl	10
 不可达序数	bù;ad,ax kě;dk dá;zd xù;gy shù;wl	10
 不可抵赖性	bù;ad,ax kě;dk dǐ;fd lài;uf xìng;xu	10
-不可调节的	bù;ad,ax kě;dk diào;yv jié;ce de;bu	10
 不可定误差	bù;ad,ax kě;dk dìng;bp wù;yw chā;yg	10
 不可定义数	bù;ad,ax kě;dk dìng;bp yì;di,id shù;wl	10
 不可度量的	bù;ad,ax kě;dk dù;gy liàng;ol de;bu	10
@@ -5141,6 +5140,7 @@ sort: by_weight
 不可思议地	bù;ad,ax kě;dk sī;xt,tx yì;yy de;ty	10
 不可思议经	bù;ad,ax kě;dk sī;xt,tx yì;yy jīng;sg	10
 不可思议呀	bù;ad,ax kě;dk sī;xt,tx yì;yy ya;ky	10
+不可调节的	bù;ad,ax kě;dk tiáo;yv jié;ce de;bu	10
 不可通约量	bù;ad,ax kě;dk tōng;zy yuē;su liàng;ol	10
 不可微规划	bù;ad,ax kě;dk wēi;xw guī;fj,jf huà;dg,gd	10
 不可先传也	bù;ad,ax kě;dk xiān;ne,en chuán;rv yě;gg	10
@@ -24538,8 +24538,8 @@ sort: by_weight
 归麦榆草汤	guī;ax,dx mài;fw yú;my cǎo;cz tāng;dy	10
 鬼魅的传说	guǐ;pd,ps mèi;gw de;bu chuán;rv shuō;yd	10
 鬼门十三针	guǐ;pd,ps mén;dg shí;aa sān;aa zhēn;ju	10
+鬼迷刹玛莉	guǐ;pd,ps mí;zm chà;du mǎ;wm lì;cl	10
 鬼迷了心窍	guǐ;pd,ps mí;zm le;aa,vu xīn;dd qiào;xq,bq	10
-鬼迷刹玛莉	guǐ;pd,ps mí;zm shā;du mǎ;wm lì;cl	10
 规模的大小	guī;fj,jf mó;mm de;bu dà;ad xiǎo;ad	10
 规模的扩大	guī;fj,jf mó;mm de;bu kuò;fg dà;ad	10
 规模和范围	guī;fj,jf mó;mm hé;hk fàn;ce,cf wéi;kw	10
@@ -35919,7 +35919,7 @@ sort: by_weight
 酒店及旅游	jiǔ;dy diàn;gv jí;nd,pd lǚ;fp yóu;dz	10
 酒店用品展	jiǔ;dy diàn;gv yòng;kf pǐn;kk zhǎn;uy	10
 就顶不住了	jiù;yj dǐng;yd,dy bú;ad,ax zhù;rv le;aa,vu	10
-九顶铁刹山	jiǔ;py dǐng;yd,dy tiě;ju shā;du shān;aa	10
+九顶铁刹山	jiǔ;py dǐng;yd,dy tiě;ju chà;du shān;aa	10
 救度速勇母	jiù;wq dù;gy sù;zu yǒng;ly mǔ;vd,ad	10
 九段沙湿地	jiǔ;py duàn;du shā;du shī;dx dì;ty	10
 久夛良木健	jiǔ;pd,dd duō;ax,vx,xa liáng;dg mù;ad jiàn;rj	10
@@ -66771,7 +66771,6 @@ sort: by_weight
 托勒玫体系	tuō;fq,ft lè;lg,gl méi;ww tǐ;rb xì;ps	10
 脱离了现实	tuō;od lí;ws,wl le;aa,vu xiàn;wj shí;bt	10
 脱利腾弥撒	tuō;od lì;hd,dh téng;om mí;ge sā;fs	10
-脱利腾弥撒	tuō;od lì;hd,dh téng;om mí;ge sā;fs	10
 陀螺测斜仪	tuó;et luó;il cè;dz xié;dy yí;ry	10
 陀螺地震计	tuó;et luó;il dì;ty zhèn;yi jì;yu	10
 陀螺方位角	tuó;et luó;il fāng;dw wèi;rl jiǎo;dy	10
@@ -83146,7 +83145,6 @@ sort: by_weight
 鱼雷发射器	yú;da léi;yt fā;ay shè;cu,uc qì;kk,qk	10
 鱼雷攻击机	yú;da léi;yt gōng;gw,wg jī;eu jī;mj	10
 鱼雷轰炸机	yú;da léi;yt hōng;iu zhà;hv jī;mj	10
-鱼雷艇事件	yú;da léi;yt tǐng;vt shì;aa jiàn;rn	10
 鱼雷艇事件	yú;da léi;yt tǐng;vt shì;aa jiàn;rn	10
 鱼雷修理厂	yú;da léi;yt xiū;rp lǐ;wl chǎng;ap	10
 鱼雷巡洋舰	yú;da léi;yt xún;zi yáng;dy jiàn;vj	10
@@ -156571,7 +156569,7 @@ sort: by_weight
 亨哈二氏吸入器	hēng;wl,lk hā;kh èr;aa shì;pg xī;kj rù;pd qì;kk,qk	10
 恒基落禾沙项目	héng;xg jī;tq,qt luò;cl hé;pd,pm shā;du xiàng;yg,gy mù;aa	10
 横连器固定长度	héng;mh lián;zi qì;kk,qk gù;kg dìng;bp cháng;pd dù;gy	10
-横连器可调长度	héng;mh lián;zi qì;kk,qk kě;dk diào;yv cháng;pd dù;gy	10
+横连器可调长度	héng;mh lián;zi qì;kk,qk kě;dk tiáo;yv cháng;pd dù;gy	10
 亨奇奥二氏试验	hēng;wl,lk qí;dk ào;dm,pd èr;aa shì;pg shì;yu yàn;ma,mq	10
 亨斯二氏植皮刀	hēng;wl,lk sī;jq,qj èr;aa shì;pg zhí;mv pí;ay,vy dāo;gp,pg	10
 亨特吉二氏试验	hēng;wl,lk tè;ns jí;ku,uk èr;aa shì;pg shì;yu yàn;ma,mq	10
@@ -157538,8 +157536,6 @@ sort: by_weight
 可操纵导引钢丝	kě;dk cāo;fz zòng;sc dǎo;cs,sc yǐn;ga gāng;jg sī;aa	10
 髁侧方指标刻度	kē;gg cè;rz fāng;dw zhǐ;fv biāo;mu kè;dh dù;gy	10
 可拆卸膝胫装置	kě;dk chāi;fi xiè;ea xī;oq,ou jìng;og zhuāng;yv zhì;sv	10
-可调负压吸痰管	kě;dk diào;yv fù;db yā;id,it xī;kj tán;by guǎn;vg	10
-可调颈生物型柄	kě;dk diào;yv jǐng;yg shēng;na wù;nw xíng;tx bǐng;mb	10
 可动牙科治疗台	kě;dk dòng;ly,yl yá;ap kē;hd zhì;dt liáo;bl tái;sk	10
 科尔马上诉法院	kē;hd ěr;dx,xd mǎ;aa,vh shàng;aa,ba sù;yi fǎ;dq yuàn;ew	10
 氪放射性同位素	kè;qk fàng;wf,fw shè;cu,uc xìng;xu tóng;kk wèi;rl sù;sf,fs	10
@@ -157602,6 +157598,8 @@ sort: by_weight
 科斯二氏血型系	kē;hd sī;jq,qj èr;aa shì;pg xuè;pa,pm xíng;tx xì;ps	10
 咳嗽变异性哮喘	ké;kh sòu;kq,ku biàn;wy,yy yì;cs,sc xìng;xu xiào;kx chuǎn;ke	10
 柯替氏器螺旋器	kē;mk tì;of,fo shì;pg qì;kk,qk luó;il xuán;fp qì;kk,qk	10
+可调负压吸痰管	kě;dk tiáo;yv fù;db yā;id,it xī;kj tán;by guǎn;vg	10
+可调颈生物型柄	kě;dk tiáo;yv jǐng;yg shēng;na wù;nw xíng;tx bǐng;mb	10
 可调整式翻修柄	kě;dk tiáo;yv zhěng;vi,vw shì;gy,yg fān;yf xiū;rp bǐng;mb	10
 科托布血红蛋白	kē;hd tuō;fq,ft bù;ju,uj xuè;pa,pm hóng;sg dàn;ip,pi bái;pa,po	10
 科瓦二氏加速器	kē;hd wǎ;ad èr;aa shì;pg jiā;lk,kl sù;zu qì;kk,qk	10
@@ -157956,7 +157954,6 @@ sort: by_weight
 六味地黄益肾肝	liù;wb wèi;kw dì;ty huáng;ad,cb yì;mb shèn;oy gān;og	10
 六味防脱生发酊	liù;wb wèi;kw fáng;ef tuō;od shēng;na fà;ay dīng;yd	10
 流行性斑疹伤寒	liú;di xíng;xd,xi xìng;xu bān;ww zhěn;bp shāng;rl hán;bd	10
-流行性感冒疫苗	liú;di xíng;xd,xi xìng;xu gǎn;xx mào;oo yì;bu miáo;ct	10
 流行性关节红斑	liú;di xíng;xd,xi xìng;xu guān;qd,bt jié;ce hóng;sg bān;ww	10
 六一国际儿童节	liù;wb yī;aa guó;ky jì;eu ér;pg tóng;ll jié;ce	10
 龙宝牌精品燕窝	lóng;ad bǎo;by pái;pb jīng;mq pǐn;kk yàn;ch,hb wō;xn,xg	10
@@ -159803,7 +159800,7 @@ sort: by_weight
 弹簧的劲度系数	tán;gd huáng;vh de;bu jìn;lg dù;gy xì;ps shù;wl	10
 弹簧圈外周介入	tán;gd huáng;vh quān;kj wài;xb zhōu;kj,kk jiè;ra,rd rù;pd	10
 弹簧圈心脏介入	tán;gd huáng;vh quān;kj xīn;dd zàng;ov jiè;ra,rd rù;pd	10
-弹力可调胸腹裤	tán;gd lì;gp kě;dk diào;yv xiōng;ox fù;of kù;yk	10
+弹力可调胸腹裤	tán;gd lì;gp kě;dk tiáo;yv xiōng;ox fù;of kù;yk	10
 痰迷舌强服之醒	tán;by mí;zm shé;kq,qk qiáng;gs fú;oy zhī;dd xǐng;yx	10
 痰凝气滞皆能除	tán;by níng;dy qì;py,ry zhì;dd jiē;bb néng;sb chú;ey	10
 碳收益分享模式	tàn;ut shōu;wj,jw yì;mb fēn;bd,db xiǎng;wz,zk mó;mm shì;gy,yg	10
@@ -161878,7 +161875,6 @@ sort: by_weight
 综合气动力系统	zōng;sz hé;rk qì;py,ry dòng;ly,yl lì;gp xì;ps tǒng;si	10
 综合素质的提高	zōng;sz hé;rk sù;sf,fs zhì;bu,pb de;bu tí;fu gāo;wk	10
 综合物流服务商	zōng;sz hé;rk wù;nw liú;di fú;oy wù;wl shāng;wk	10
-综合行政执法局	zōng;sz hé;rk xíng;xd,xi zhèng;wv zhí;fw fǎ;dq jú;uk	10
 综合行政执法局	zōng;sz hé;rk xíng;xd,xi zhèng;wv zhí;fw fǎ;dq jú;uk	10
 综合业务数字网	zōng;sz hé;rk yè;aa wù;wl shù;wl zì;bz wǎng;ki	10
 综合整理自网络	zōng;sz hé;rk zhěng;vi,vw lǐ;wl zì;pa,po wǎng;ki luò;sg	10
