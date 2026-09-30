@@ -339,16 +339,48 @@ texlua -e 'assert(loadfile("path/to/file.lua"))'
 
 ## 上游同步与多机维护
 
-本项目是多机部署仓库，分支与同步约定如下：
+本项目是多机部署仓库。以下按 2026-09-30 的实际配置整理。
 
-* `upstream-zrm` 跟踪上游 `amzxyz/rime-wanxiang` 的 `wanxiang-zrm-fuzhu`（自然码 PRO 分包）分支，作为同步基准；主线 `wanxiang` 仅作热修来源（cherry-pick），不计入同步基准。
-* `master` 是实际部署分支（个人配置、脚本、Lua 补丁、本地数据均在 master 上）。
-* 同步 = 以 `upstream-zrm` 为对照基准做 diff/restore，并排除本地自有文件（`docs/*`、`*.ps1`、`weasel_*.yaml`、`userzhj.dict.yaml`、`*.custom.yaml` 等**；上游改名/删除按 `git diff -M --name-status` 识别.**
-* `lua/wanxiang/super_sequence.lua` 采用「上游版 + 重放本地 Ctrl 补丁」：补丁 = `git diff 1751614 80c32a8 -- lua/wanxiang/super_sequence.lua`（用 cmd 重定向落盘再 `git apply`，PowerShell 管道会改换行导致失败**。
+### 远端与分支
+
+* `origin` = `https://github.com/zhjnerv/rime-wanxiang.git`（私有仓库，包含全部个人配置，其他电脑从这里同步）。
+* `upstream` = `https://github.com/amzxyz/rime-wanxiang.git`（只读上游来源）。
+* `main` 是唯一的部署分支：个人配置、脚本、Lua 补丁、本地数据都在 main 上。
+* 上游同步基准 = `upstream/wanxiang-zrm-fuzhu`（自然码 PRO 分包）；上游主线 `upstream/wanxiang` 仅作热修来源（cherry-pick），不计入同步基准。
+* `ZHJ-GOW` 是维护机：从上游同步 → 本地验证 → `git push origin main`；其他电脑执行 `git pull --ff-only origin main` 后在托盘重新部署。
+* `origin` 上除 `main` 外只保留 `gh-pages`（文档站点）和 `plum`（plum 安装器）。上游的打包分支（`wanxiang-*-fuzhu`、`wanxiang-lite/pure/base` 等）和上游 release tag 与本项目无关，已于 2026-09-30 从本地与 origin 移除；需要时用 `git fetch upstream +refs/heads/<branch>:refs/remotes/upstream/<branch>` 单独取回。
+
+### refspec 约定
+
+只跟踪需要的分支。曾因全量跟踪上游几十个打包分支，让 `.git` 膨胀到 2 GB；现在是 66 MB。
+
+```bash
+# origin：只取 main
+git config remote.origin.fetch '+refs/heads/main:refs/remotes/origin/main'
+git config remote.origin.tagOpt --no-tags
+
+# upstream：只取自然码分包与上游主线，blob:none 按需取
+git config remote.upstream.fetch '+refs/heads/wanxiang-zrm-fuzhu:refs/remotes/upstream/wanxiang-zrm-fuzhu'
+git config --add remote.upstream.fetch '+refs/heads/wanxiang:refs/remotes/upstream/wanxiang'
+git config remote.upstream.promisor true
+git config remote.upstream.partialclonefilter blob:none
+git config remote.upstream.tagOpt --no-tags
+```
+
+日常只用 `git fetch origin` 或 `git fetch upstream`，不要用 `git fetch --all`。
+
+### Git 维护禁忌
+
+不要在 promisor / partial clone 上执行 `git gc --prune=now` 或 `git gc --aggressive`：它既不回收 promisor 包，又可能删掉仍被 `main` 历史引用的对象（实测会让 `git rev-list --objects main` 报 `missing blob object` 而中断）。
+
+需要缩小仓库时的做法：先窄化 refspec、清掉多余的远端跟踪分支与 tag，再逐项评估；若仓库已经被污染，直接从 `origin` 重新克隆 `main`（`git clone --single-branch --branch main`）后替换 `.git`，不要就地 gc。
+
+### 同步时的本地保留文件
+
+* 同步 = 以 `upstream/wanxiang-zrm-fuzhu` 为对照基准做 diff/restore，并排除本地自有文件（`docs/*`、`*.ps1`、`weasel_*.yaml`、`userzhj.dict.yaml`、`*.custom.yaml` 等）；上游改名/删除按 `git diff -M --name-status` 识别。
+* `lua/wanxiang/super_sequence.lua` 采用「上游版 + 重放本地 Ctrl 补丁」：补丁 = `git diff 1751614 80c32a8 -- lua/wanxiang/super_sequence.lua`（用 cmd 重定向落盘再 `git apply`，PowerShell 管道会改换行导致失败）。
 * **重放 Ctrl 补丁后必须做 Lua 语法检查**（`luac -p` 或人工核对 `and` 两侧空格）——该补丁曾因 `highlight_indexand` 少空格导致输入法整体无法出中文候选。
-* `lua/custom_en_punct.lua` 为本地保留文件（上游已删但本地配置仍在引用**，不得随上游清理删除。
-* 发布 = 维护机 `git push rime-wx master:main`，其他电脑 `git pull --ff-only rime-wx main` 后托盘重新部署即成。.
-
+* `lua/custom_en_punct.lua` 为本地保留文件（上游已删但本地配置仍在引用），不得随上游清理删除。
 
 ## Python and Shell Rules
 
