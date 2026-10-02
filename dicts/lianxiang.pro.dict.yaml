@@ -3296,7 +3296,7 @@ sort: by_weight
 北越人民军	běi;ap,bj yuè;zy rén;pd mín;ag,vg jūn;bi	10
 备孕的夫妻	bèi;wt yùn;zn de;bu fū;ad,er qī;na,nq	10
 备孕的女性	bèi;wt yùn;zn de;bu nǚ;aa,vh xìng;xu	10
-被载入史册	bèi;yp zài;gi,ig rù;pd shǐ;ki,ad cè;ka,pa	10
+被载入史册	bèi;yp zǎi;gi,ig rù;pd shǐ;ki,ad cè;ka,pa	10
 被炸成碎片	bèi;yp zhà;hv chéng;gg,wg suì;uz piàn;pa,pv	10
 被占了便宜	bèi;yp zhàn;bk le;aa,vu pián;rg yi;bq	10
 北站派出所	běi;ap,bj zhàn;lv pài;dp chū;ck,aa suǒ;hj,jh	10
@@ -84786,7 +84786,7 @@ sort: by_weight
 在日外国人	zài;ta,ut rì;aa,or wài;xb guó;ky rén;pd	10
 在日中国人	zài;ta,ut rì;aa,or zhōng;aa,ka guó;ky rén;pd	10
 再入大气层	zài;aa,at rù;pd dà;ad qì;py,ry céng;uy	10
-载入了史册	zài;gi,ig rù;pd le;aa,vu shǐ;ki,ad cè;ka,pa	10
+载入了史册	zǎi;gi,ig rù;pd le;aa,vu shǐ;ki,ad cè;ka,pa	10
 在三环路上	zài;ta,ut sān;aa huán;wb lù;zg shàng;aa,ba	10
 宰桑纪念碑	zǎi;bx sāng;mr,mu,ym jì;sj niàn;xj bēi;ub	10
 在森林深处	zài;ta,ut sēn;ml lín;mm shēn;dm chù;wb	10
@@ -115734,7 +115734,7 @@ sort: by_weight
 可以用中文吗	kě;dk yǐ;rd,ry yòng;kf zhōng;aa,ka wén;wi,dd ma;km	10
 可以游刃有余	kě;dk yǐ;rd,ry yóu;dz rèn;dd yǒu;ou,uo yú;rb	10
 可以预见未来	kě;dk yǐ;rd,ry yù;yy jiàn;ag,ek,ke wèi;ex,ad lái;am,wb	10
-可以载入史册	kě;dk yǐ;rd,ry zài;gi,ig rù;pd shǐ;ki,ad cè;ka,pa	10
+可以载入史册	kě;dk yǐ;rd,ry zǎi;gi,ig rù;pd shǐ;ki,ad cè;ka,pa	10
 可抑制张力丝	kě;dk yì;fe zhì;dg,dv zhāng;gi lì;gp sī;aa	10
 可以足不出户	kě;dk yǐ;rd,ry zú;kv bù;ad,ax chū;ck,aa hù;dp,du	10
 可以做得更好	kě;dk yǐ;rd,ry zuò;rg de;xc gèng;ad,ag hǎo;nz	10
@@ -146629,7 +146629,7 @@ sort: by_weight
 阻塞性肺不张	zǔ;eq sè;tb,bt xìng;xu fèi;of,oj bù;ad,ax zhāng;gi	10
 祖耶夫斯基区	zǔ;uq yé;ee fū;ad,er sī;jq,qj jī;tq,qt qū;ki	10
 族裔民族主义	zú;fu yì;yk mín;ag,vg zú;fu zhǔ;dw yì;di,id	10
-足以载入史册	zú;kv yǐ;rd,ry zài;gi,ig rù;pd shǐ;ki,ad cè;ka,pa	10
+足以载入史册	zú;kv yǐ;rd,ry zǎi;gi,ig rù;pd shǐ;ki,ad cè;ka,pa	10
 祖云达斯球员	zǔ;uq yún;es,se dá;zd sī;jq,qj qiú;wq yuán;kb	10
 组织胺性头痛	zǔ;sq zhī;sv àn;oa xìng;xu tóu;dd tòng;by	10
 阻止火势蔓延	zǔ;eq zhǐ;aa huǒ;dd shì;lv màn;cm yán;zv	10
@@ -162252,6 +162252,7 @@ sort: by_weight
 鄱阳湖自然保护区	pó;ef yáng;eo hú;dh zì;pa,po rán;hq bǎo;rd hù;fh qū;ki	10
 普氏岩石强度指数	pǔ;ob,bo shì;pg yán;uu shí;pk,kp qiáng;gs dù;gy zhǐ;fv shù;wl	10
 齐拉却尔曼斯效应	qí;wa,wp lā;fl què;eq ěr;dx,xd màn;oy sī;jq,qj xiào;wj yìng;ga	10
+岂能郁郁久居人下	qǐ;uj néng;sb yù;ey yù;ey jiǔ;pd,dd jū;ug rén;pd xià;ab,ad	10
 气相色谱质谱联用	qì;py,ry xiàng;mo sè;db pǔ;yp zhì;bu,pb pǔ;yp lián;eg yòng;kf	10
 前不着村后不着店	qián;bd,qd bù;ad,ax zháo;yo cūn;mc hòu;pk bù;ad,ax zháo;yo diàn;gv	10
 千里之堤毁于蚁穴	qiān;pa lǐ;aa,tt zhī;dd dī;tu huǐ;jy,ug yú;aa yǐ;iy xué;bb	10
@@ -162523,6 +162524,7 @@ sort: by_weight
 初祖庵及少林寺塔林	chū;yd zǔ;uq ān;gd,gy jí;nd,pd shǎo;xp lín;mm sì;ct,tc tǎ;td,th lín;mm	10
 打酒向提瓶子的要钱	dǎ;fd jiǔ;dy xiàng;pk tí;fu píng;wb zi;aa,vh de;bu yào;xn qián;jj	10
 打碎了牙往肚子里咽	dǎ;fd suì;uz le;aa,vu yá;ap wǎng;xv dù;ot zi;aa,vh lǐ;aa,tt yàn;ky	10
+大丈夫生于天地之间	dà;ad zhàng;ad fū;ad,er shēng;na yú;aa tiān;ad dì;ty zhī;dd jiān;mo,om	10
 但求同年同月同日死	dàn;rd qiú;ad tóng;kk nián;ra,pa tóng;kk yuè;oy,pa tóng;kk rì;aa,or sǐ;db	10
 当一天和尚撞一天钟	dāng;xx yì;aa tiān;ad hé;hk shang;xk zhuàng;ft yì;aa tiān;ad zhōng;jv	10
 到什么山上唱什么歌	dào;dv shén;ru me;ps shān;aa shàng;aa,ba chàng;ki shén;ru me;ps gē;qg	10
@@ -162547,6 +162549,7 @@ sort: by_weight
 机会是给有准备的人	jī;mj huì;ry shì;op,ov gěi;sh yǒu;ou,uo zhǔn;dv bèi;wt de;bu rén;pd	10
 加州大学伯克利分校	jiā;lk,kl zhōu;id,da dà;ad xué;zb,dz bó;rb kè;eg,ux lì;hd,dh fēn;bd,db xiào;mj	10
 加州大学洛杉矶分校	jiā;lk,kl zhōu;id,da dà;ad xué;zb,dz luò;dg shān;mp jī;uj fēn;bd,db xiào;mj	10
+将在外君命有所不受	jiāng;pc,jc zài;ta,ut wài;xb jūn;ky mìng;re yǒu;ou,uo suǒ;hj,jh bú;ad,ax shòu;vy,yb	10
 晋绥解放区烈士陵园	jìn;oy,yo suí;st jiě;jn fàng;wf,fw qū;ki liè;hl shì;aa líng;el,ew yuán;ky	10
 金太祖阿骨打御陵址	jīn;ra,pa tài;dd zǔ;uq ā;ek gǔ;go,ob,og dǎ;fd yù;xx líng;el,ew zhǐ;tv	10
 九百六十万平方公里	jiǔ;py bǎi;ab liù;wb shí;aa wàn;ag,ap píng;aa,gb fāng;dw gōng;sb,bs lǐ;aa,tt	10
