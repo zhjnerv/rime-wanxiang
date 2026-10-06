@@ -378,6 +378,10 @@ git config remote.upstream.tagOpt --no-tags
 ### 同步时的本地保留文件
 
 * 同步 = 以 `upstream/wanxiang-zrm-fuzhu` 为对照基准做 diff/restore，并排除本地自有文件（`docs/*`、`*.ps1`、`weasel_*.yaml`、`userzhj.dict.yaml`、`*.custom.yaml` 等）；上游改名/删除按 `git diff -M --name-status` 识别。
+* 上游维护的大词库（当前主要是 `dicts/*.pro.dict.yaml` 及上游发布包中的同类词库）默认随上游更新，直接采用新上游版本，不做“保留本地旧词库”的三方合并；同步后核对上游 blob、文件大小、Tab 分隔和换行格式。只有明确登记为本地维护的词库才保留本地版本。
+* 本地保留区包括 `userzhj.dict.yaml`、明确的个人小词库、`*.custom.yaml`、`weasel_*.yaml`、`lua/custom_en_punct.lua` 以及有记录的 Lua 本地补丁；对这些文件先比较上游变化，再保留或重放补丁。同步前按“上游资产 / 本地资产 / 上游文件上的本地补丁”分类，不再仅按文件大小决定处理方式。
+* `blob:none` partial clone 下处理大词库时，避免用 `git cat-file` 或 `git ls-tree -l` 批量触发按需下载；优先按单个 blob 定点 `git fetch`，必要时使用带超时、重试和临时文件的直链下载，校验通过后再写入工作区。
+* 标准顺序：建立回退分支 → 获取并锁定上游提交 → 生成 `git diff -M --name-status` 清单 → 直接恢复上游资产并重放本地补丁 → 做 hash、格式、`git diff --check`、Lua/部署验证 → 提交、部署成功后推送。
 * `lua/wanxiang/super_sequence.lua` 采用「上游版 + 重放本地 Ctrl 补丁」：补丁 = `git diff 1751614 80c32a8 -- lua/wanxiang/super_sequence.lua`（用 cmd 重定向落盘再 `git apply`，PowerShell 管道会改换行导致失败）。
 * **重放 Ctrl 补丁后必须做 Lua 语法检查**（`luac -p` 或人工核对 `and` 两侧空格）——该补丁曾因 `highlight_indexand` 少空格导致输入法整体无法出中文候选。
 * `lua/custom_en_punct.lua` 为本地保留文件（上游已删但本地配置仍在引用），不得随上游清理删除。
