@@ -5,7 +5,6 @@ name: jichu
 version: "LTS"
 sort: by_weight
 ...
-攀	pān;ud,mu,uf
 阿爸	ā;ek bà;fb	716
 阿坝	ā;ek bà;tb	207
 阿巴	ā;ek bā;ag	166
@@ -2614,8 +2613,8 @@ sort: by_weight
 办报	bàn;lb bào;fy	112
 半杯	bàn;bf bēi;mb	628
 版本	bǎn;pf běn;aa,ma	119474
+半本	bàn;bf běn;aa,ma	4471
 坂本	bǎn;tf běn;aa,ma	857
-半本	bàn;bf běn;aa,ma	471
 扳本	bān;ff běn;aa,ma	348
 斑比	bān;ww bǐ;bb	1125
 板壁	bǎn;mf bì;tb,tx	1069
@@ -23204,7 +23203,8 @@ sort: by_weight
 等着	děng;vs zhe;yo	22008
 瞪着	dèng;od zhe;yo	1585
 等值	děng;vs zhí;rv	1617
-等至	děng;vs zhì;tv,vt	981
+等职	děng;vs zhí;ev	981
+等至	děng;vs zhì;tv,vt	211
 等重	děng;vs zhòng;pa,ql	192
 登州	dēng;dd zhōu;id,da	207
 邓州	dèng;ey,ye zhōu;id,da	197
@@ -52533,11 +52533,11 @@ sort: by_weight
 稽山	jī;hv shān;aa	48
 集善	jí;mv,vm shàn;yk,ka,kq	38
 祭山	jì;uy,ou shān;aa	30
+记上	jì;yj shàng;aa,ba	2449
 系上	jì;ps shàng;aa,ba	1482
 机上	jī;mj shàng;aa,ba	678
 集上	jí;mv,vm shàng;aa,ba	540
 挤上	jǐ;fq shàng;aa,ba	496
-记上	jì;yj shàng;aa,ba	449
 击伤	jī;eu shāng;rl	357
 激赏	jī;dj,dw shǎng;bk,dk,xy	182
 寄上	jì;bq shàng;aa,ba	128
@@ -185287,6 +185287,8 @@ sort: by_weight
 爆照求	bào;hb zhào;hv qiú;ad	252
 抱着吧	bào;fb zhe;yo ba;kb	382
 抱着打	bào;fb zhe;yo dǎ;fd	0
+抱着个	bào;fb zhe;yo gè;ra,pa	320
+报这个	bào;fy zhè;zw ge;ra,pa	183
 抱着狗	bào;fb zhe;yo gǒu;qj	41
 抱着花	bào;fb zhe;yo huā;ch	38
 抱着了	bào;fb zhe;yo le;aa,vu	518
@@ -783109,6 +783111,7 @@ sort: by_weight
 包尔沙克	bāo;gs ěr;dx,xd shā;du kè;eg,ux	212
 宝尔势格	bǎo;by ěr;dx,xd shì;lv gé;mg	162
 鲍尔斯顿	bào;yb ěr;dx,xd sī;jq,qj dùn;yt	162
+薄而松弛	báo;cc,cp ér;aa sōng;mg chí;gy	15
 鲍尔托克	bào;yb ěr;dx,xd tuō;fq,ft kè;eg,ux	52
 鲍二媳妇	bào;yb èr;aa xí;nx fù;nx	202
 保二小学	bǎo;rd èr;aa xiǎo;ad xué;zb,dz	50
@@ -791769,6 +791772,8 @@ sort: by_weight
 比较放心	bǐ;bb jiào;ij fàng;wf,fw xīn;dd	1080
 比较费劲	bǐ;bb jiào;ij fèi;bf,fb jìn;lg	846
 比较费力	bǐ;bb jiào;ij fèi;bf,fb lì;gp	684
+比较费时	bǐ;bb jiào;ij fèi;bf,fb shí;oc	152
+比较费事	bǐ;bb jiào;ij fèi;bf,fb shì;aa	91
 比较分散	bǐ;bb jiào;ij fēn;bd,db sǎn;wo	806
 比较分析	bǐ;bb jiào;ij fēn;bd,db xī;mj	452
 比较封闭	bǐ;bb jiào;ij fēng;cg bì;mc	706
@@ -958052,7 +958057,7 @@ sort: by_weight
 胡为此堂	hú;og wéi;dd cǐ;vb táng;xt	99
 互为促进	hù;aa,ea wéi;dd cù;rz jìn;zj	306
 户为单位	hù;dp,du wéi;dd dān;ba,bd wèi;rl	558
-互为倒数	hù;aa,ea wéi;dd dǎo;rd shù;wl	454
+互为倒数	hù;aa,ea wéi;dd dào;rd shù;wl	454
 互为对手	hù;aa,ea wéi;dd duì;cy,yc shǒu;pa,ub	423
 互为呼应	hù;aa,ea wéi;dd hū;kh yìng;ga	333
 互为犄角	hù;aa,ea wéi;dd jī;nq jiǎo;dy	454
@@ -1197505,8 +1197510,10 @@ sort: by_weight
 水合肼氨	shuǐ;ad,uv hé;rk jǐng;oj ān;qa	45
 水和空气	shuǐ;ad,uv hé;hk kōng;xg,bg qì;py,ry	675
 水合离子	shuǐ;ad,uv hé;rk lí;ws,wl zǐ;aa,vh	392
+水和奶粉	shuǐ;ad,uv hé;hk nǎi;nn fěn;mf	96
 谁和你在	shuí;yv hé;hk nǐ;re zài;ta,ut	207
 水和食物	shuǐ;ad,uv hé;hk shí;rl,pd wù;nw	796
+水和水泥	shuǐ;ad,uv hé;hk shuǐ;ad,uv ní;dn	29
 水褐铜矾	shuǐ;ad,uv hè;yh tóng;jt fán;uf	45
 谁和我开	shuí;yv hé;hk wǒ;pd,pp kāi;ac	50
 谁和我约	shuí;yv hé;hk wǒ;pd,pp yuē;su	76
@@ -1211494,7 +1211501,7 @@ sort: by_weight
 榻榻米床	tà;my tà;my mǐ;dd chuáng;gm,mg	464
 榻榻米垫	tà;my tà;my mǐ;dd diàn;tv	306
 榻榻米房	tà;my tà;my mǐ;dd fáng;hf	554
-踏踏实实	tà;zt tà;zt shí;bt shí;bt	7492
+踏踏实实	tā;zt tā;zt shí;bt shí;bt	7492
 他太菜了	tā;ry tài;dd cài;cc le;aa,vu	13
 他太难了	tā;ry tài;dd nán;yv le;aa,vu	52
 她太难了	tā;ny tài;dd nán;yv le;aa,vu	52
