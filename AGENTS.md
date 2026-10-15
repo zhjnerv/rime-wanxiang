@@ -384,6 +384,7 @@ git config remote.upstream.tagOpt --no-tags
 * 标准顺序：建立回退分支 → 获取并锁定上游提交 → 生成 `git diff -M --name-status` 清单 → 直接恢复上游资产并重放本地补丁 → 做 hash、格式、`git diff --check`、Lua/部署验证 → 提交、部署成功后推送。
 * `lua/wanxiang/super_sequence.lua` 采用「上游版 + 重放本地 Ctrl 补丁」：补丁 = `git diff 1751614 80c32a8 -- lua/wanxiang/super_sequence.lua`（用 cmd 重定向落盘再 `git apply`，PowerShell 管道会改换行导致失败）。
 * **重放 Ctrl 补丁后必须做 Lua 语法检查**（`luac -p` 或人工核对 `and` 两侧空格）——该补丁曾因 `highlight_indexand` 少空格导致输入法整体无法出中文候选。
+* `lua/wanxiang/custom_phrase.lua` 采用「上游版 + 本地脚本翻译器类型补丁」：两处取翻译器改用 `Component.ScriptTranslator(env.engine, <namespace>, "script_translator")`。`disconnect()` 只定义在 `ScriptTranslator`/`TableTranslator` 上（见 [lua/wanxiang/librime.lua](lua/wanxiang/librime.lua)）；本机 Weasel 0.17.4 自带的 librime-lua 早于 librime-lua #399（2025-06-28 才让 `Component.Translator` 转发到 `ScriptTranslator`），不补丁会在每次引擎重建时刷出 `LuaFilter::~LuaFilter of *wanxiang.custom_phrase ... (method 'disconnect')`。重放后需做 Lua 语法检查，并确认部署/重载日志中该报错为 0。
 * `lua/custom_en_punct.lua` 为本地保留文件（上游已删但本地配置仍在引用），不得随上游清理删除。
 
 ## Python and Shell Rules
