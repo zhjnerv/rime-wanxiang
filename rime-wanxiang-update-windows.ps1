@@ -1302,7 +1302,6 @@ function Update-GramModel {
 if ($InputGramModel -eq "0") {
     # 下载模型
     $GramUpdateTimeKey = $GramReleaseTag + "_gram_update_time"
-    $GramUpdateTime = Get-TimeRecord -filePath $TimeRecordFile -key $GramUpdateTimeKey
     $GramRemoteTime = [datetime]::Parse($(Get-UpdateAtObj -assetInfo $ExpectedGramTypeInfo))
     Write-Host "正在检查模型是否需要更新..." -ForegroundColor Yellow
     # 检查目标文件 $targetDir/$tempGram 是否存在
@@ -1310,38 +1309,42 @@ if ($InputGramModel -eq "0") {
     if ($Debug) {
         Write-Host "模型文件路径: $filePath" -ForegroundColor Green
     }
-    Write-Host "本地时间: $GramUpdateTime" -ForegroundColor Green
-    Write-Host "远程时间: $GramRemoteTime" -ForegroundColor Green
-    if (Compare-UpdateTime -localTime $GramUpdateTime -remoteTime $GramRemoteTime) {
-        Update-GramModel
-        $UpdateFlag = $true
-    } elseif (Test-Path -Path $filePath) {
-        if ($UseCnbMirrorSource) {
-            # 校验文件大小
-            $expectedSize = [int64]$ExpectedGramTypeInfo.size_in_byte
-            $actualSize = (Get-Item $filePath).Length
-            if ($expectedSize -ne $actualSize) {
-                Write-Host "文件大小校验失败，需要更新" -ForegroundColor Red
-                Write-Host "期望大小: $expectedSize 字节，实际大小: $actualSize 字节" -ForegroundColor Red
-                Remove-Item -Path $filePath -Force
-                Update-GramModel
-                $UpdateFlag = $true
-            }
-        } else {
-            # 计算目标文件的SHA256
-            $localSHA256 = (Get-FileHash $filePath -Algorithm SHA256).Hash.ToLower()
-            # 计算远程文件的SHA256
-            $remoteSHA256 = $ExpectedGramTypeInfo.digest.Split(":")[1].ToLower()
-            # 比较SHA256
-            if ($localSHA256 -ne $remoteSHA256) {
-                Write-Host "模型SHA256不匹配，需要更新" -ForegroundColor Red
-                Update-GramModel
-                $UpdateFlag = $true
+
+    # 直接用远端资产的大小与 SHA256 判定，避免 CNB updated_at 动态变化导致重复下载
+    if ($UseCnbMirrorSource) {
+        $ExpectedGramSize = [int64]$ExpectedGramTypeInfo.size_in_byte
+        $ExpectedGramSHA256 = $ExpectedGramTypeInfo.hash_value
+    } else {
+        $ExpectedGramSize = [int64]$ExpectedGramTypeInfo.size
+        $ExpectedGramSHA256 = $ExpectedGramTypeInfo.digest.Split(":")[1]
+    }
+
+    $GramNeedUpdate = $false
+    if (-not (Test-Path -Path $filePath)) {
+        Write-Host "模型不存在，需要更新" -ForegroundColor Red
+        $GramNeedUpdate = $true
+    } else {
+        $actualSize = (Get-Item $filePath).Length
+        if ($ExpectedGramSize -and ($ExpectedGramSize -ne $actualSize)) {
+            Write-Host "模型大小不一致，需要更新" -ForegroundColor Red
+            Write-Host "期望大小: $ExpectedGramSize 字节，实际大小: $actualSize 字节" -ForegroundColor Red
+            $GramNeedUpdate = $true
+        } elseif ($ExpectedGramSHA256) {
+            $actualSHA256 = (Get-FileHash $filePath -Algorithm SHA256).Hash.ToLower()
+            if ($actualSHA256 -ne $ExpectedGramSHA256.ToLower()) {
+                Write-Host "模型SHA256不一致，需要更新" -ForegroundColor Red
+                Write-Host "本地 SHA256: $actualSHA256"
+                Write-Host "期望 SHA256: $ExpectedGramSHA256"
+                $GramNeedUpdate = $true
             }
         }
-    } else {
-        Write-Host "模型不存在，需要更新" -ForegroundColor Red
+    }
+
+    if ($GramNeedUpdate) {
         Update-GramModel
+        $UpdateFlag = $true
+    } else {
+        Write-Host "模型已是最新，无需更新" -ForegroundColor Green
     }
 }
 

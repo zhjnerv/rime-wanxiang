@@ -2,3 +2,5 @@
 *.yaml text eol=lf
 *.txt text eol=lf
 *.lua text eol=lf
+# 本地保留的 PowerShell 脚本固定用 LF，避免被 CRLF 污染导致 diff 全文件重写
+*.ps1 text eol=lf
