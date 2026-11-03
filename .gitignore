@@ -30,3 +30,6 @@ zc.userdb.old/
 # 临时文件目录，不与云端同步
 wanxiang_temp/
 .ace-tool/
+
+# 本机接力记录（ZHJ-GOW 维护机专用，不提交）
+TASK_PLAN*.md
