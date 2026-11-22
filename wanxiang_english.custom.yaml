@@ -1,7 +1,4 @@
-patch:
-  # 保留当前用户选择的自然码英文规则
-  speller/algebra:
-    __patch:
-      - wanxiang_algebra:/english/混合派生
-      - wanxiang_algebra:/english/自然码
-      - wanxiang_algebra:/26jian
+patch: {}
+# 18.2.0 起上游删除了 wanxiang_algebra 的 english 段，英文方案的派生规则内联在
+# wanxiang_english.schema.yaml，复杂的数字/混合派生统一交给 mixed 处理。
+# 本地不再覆盖 speller/algebra，保留本文件以免上游模板回写覆盖。

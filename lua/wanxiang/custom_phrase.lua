@@ -75,8 +75,7 @@ function M.init(env)
     env.insert_position = math.max(1, config:get_int("abbrev_phrase/insert_position") or 2)
     env.max_candidates = math.max(0, config:get_int("abbrev_phrase/max_candidates") or 3)
     env.special_types = { table=true, user_table=true, completion=true }
-    -- disconnect() 只定义在 ScriptTranslator 上，用 Component.Translator 取到的基类 Translator 没有该方法
-    env.custom_translator = Component.ScriptTranslator(env.engine, "custom_phrase", "script_translator")
+    env.custom_translator = Component.Translator(env.engine, "custom_phrase", "script_translator")
     env.abbrev_translator = nil
 end
 
@@ -122,7 +121,7 @@ function M.func(input, env)
         if not abbrev_enabled then return end
 
         if not env.abbrev_translator then
-            env.abbrev_translator = Component.ScriptTranslator(env.engine, "abbrev_phrase", "script_translator")
+            env.abbrev_translator = Component.Translator(env.engine, "abbrev_phrase", "script_translator")
         end
 
         local translation = env.abbrev_translator and env.abbrev_translator:query(code, seg)
@@ -203,8 +202,10 @@ function M.func(input, env)
 end
 
 local function release_translator(translator)
-    if translator then
-        translator:disconnect()
+    if translator and translator.disconnect then
+        pcall(function()
+            translator:disconnect()
+        end)
     end
 end
 
