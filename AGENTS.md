@@ -369,6 +369,12 @@ git config remote.upstream.tagOpt --no-tags
 
 日常只用 `git fetch origin` 或 `git fetch upstream`，不要用 `git fetch --all`。
 
+### 推送规则
+
+本仓库推送直接执行 `git push origin main`。
+
+不使用 `safe-push.sh`，也不在推送前执行测试、隐私扫描或提交身份门禁；这些门禁在本项目已被用户明确停用，不要自行恢复或临时调用。
+
 ### Git 维护禁忌
 
 不要在 promisor / partial clone 上执行 `git gc --prune=now` 或 `git gc --aggressive`：它既不回收 promisor 包，又可能删掉仍被 `main` 历史引用的对象（实测会让 `git rev-list --objects main` 报 `missing blob object` 而中断）。
