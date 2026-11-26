@@ -165,7 +165,7 @@ if ($PSBoundParameters.ContainsKey('cliTargetFolder') -and $cliTargetFolder) {
     }
 }
 
-$UpdateToolsVersion = "v6.4.1";
+$UpdateToolsVersion = "v6.4.2";
 if ($UpdateToolsVersion.StartsWith("DEFAULT")) {
     Write-Host "您下载的是非发行版脚本，请勿直接使用，请去 releases 页面下载最新版本：https://github.com/rimeinn/rime-wanxiang-update-tools/releases" -ForegroundColor Yellow;
 } else {
