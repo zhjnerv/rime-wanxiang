@@ -46,8 +46,11 @@ if ($existingTask) {
     Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
 }
 
-# 创建触发器 - 每30分钟执行一次
-$trigger = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 30)
+# 创建触发器 - 每2小时执行一次
+# RepetitionDuration 不能取 TimeSpan::MaxValue（任务 XML 会报超出范围），用 10 年近似"一直重复"
+$trigger = New-ScheduledTaskTrigger -Once -At (Get-Date) `
+    -RepetitionInterval (New-TimeSpan -Minutes 120) `
+    -RepetitionDuration (New-TimeSpan -Days 3650)
 
 # 创建操作（使用 PowerShell 而非直接调用，避免 UTF-8 无 BOM 脚本编码问题）
 $action = New-ScheduledTaskAction `
@@ -55,15 +58,24 @@ $action = New-ScheduledTaskAction `
     -Argument "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$scriptPath`""
 
 # 创建任务设置
+# RunOnlyIfIdle：只在用户空闲时启动，避免正在打字时被杀掉输入法
 $settings = New-ScheduledTaskSettingsSet `
     -AllowStartIfOnBatteries `
     -DontStopIfGoingOnBatteries `
     -StartWhenAvailable `
     -RunOnlyIfNetworkAvailable `
+    -RunOnlyIfIdle `
     -MultipleInstances IgnoreNew
 
+$settings.IdleSettings.IdleDuration = "PT5M"
+$settings.IdleSettings.WaitTimeout = "PT1H"
+# 一旦开始就让它跑完：中途停止会跳过 finally，留下被杀的 WeaselServer
+$settings.IdleSettings.StopOnIdleEnd = $false
+
 # 创建任务主体
-$taskPrincipal = New-ScheduledTaskPrincipal -UserId $userName -LogonType S4U
+# Interactive：任务运行在登录会话（Session 1）而不是 Session 0，
+# 否则它拉起的 WeaselServer 会脱离桌面，托盘消失、中英切换不可见
+$taskPrincipal = New-ScheduledTaskPrincipal -UserId $userName -LogonType Interactive -RunLevel Limited
 
 # 注册任务
 Register-ScheduledTask `
@@ -72,11 +84,12 @@ Register-ScheduledTask `
     -Action $action `
     -Settings $settings `
     -Principal $taskPrincipal `
-    -Description "每30分钟自动同步 Rime 输入法配置到 sync_dir"
+    -Description "每2小时在用户空闲时自动同步 Rime 输入法配置到 sync_dir"
 
 Write-Host "任务创建成功！"
 Write-Host "任务名称: $taskName"
-Write-Host "执行间隔: 每30分钟"
+Write-Host "执行间隔: 每2小时（仅用户空闲时启动）"
+Write-Host "运行会话: 交互式登录会话"
 Write-Host "执行引擎: $pwshPath"
 Write-Host "脚本路径: $scriptPath"
 Write-Host ""

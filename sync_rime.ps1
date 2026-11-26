@@ -18,6 +18,14 @@ $ErrorActionPreference = 'Stop'
 # 失败重试上限
 $MaxAttempts = 3
 
+# 重试之间的等待秒数。
+# /sync 内部关闭 '.temp' 库后约 40ms 就会重开它，立刻重跑会原地撞回同一竞态窗口，
+# 所以必须让上一次的句柄和杀软扫描先结束。
+$RetryDelaySeconds = 8
+
+# 停服务后等待进程退出的上限（秒）
+$StopTimeoutSeconds = 10
+
 # 查找 WeaselDeployer.exe 路径（支持不同版本和安装位置）
 $possiblePaths = @(
     "C:\Program Files\Rime\weasel-*\WeaselDeployer.exe",
@@ -55,9 +63,35 @@ try {
 }
 
 # 跑一次 /sync，期间持续压制被系统重新拉起的 WeaselServer
+function Wait-WeaselServerStopped {
+    param([int]$TimeoutSeconds = 10)
+
+    $deadline = (Get-Date).AddSeconds($TimeoutSeconds)
+    while ((Get-Date) -lt $deadline) {
+        if (-not (Get-Process -Name WeaselServer -ErrorAction SilentlyContinue)) {
+            return $true
+        }
+        Start-Sleep -Milliseconds 200
+    }
+    return $false
+}
+
 function Invoke-SyncOnce {
     Stop-Process -Name WeaselServer -Force -ErrorAction SilentlyContinue
-    Start-Sleep -Milliseconds 300
+
+    # 必须确认进程真的退出了再跑 /sync：服务若还在，它会一直占着 userdb 的 LOCK，
+    # 这一轮注定失败，还会白白多断一次输入。
+    if (-not (Wait-WeaselServerStopped -TimeoutSeconds $StopTimeoutSeconds)) {
+        return [pscustomobject]@{
+            ExitCode   = -1
+            Suppressed = 0
+            EndTime    = Get-Date
+            Skipped    = $true
+        }
+    }
+
+    # 进程退出后 LevelDB 句柄释放有延迟，给一点余量再让 deployer 进场
+    Start-Sleep -Milliseconds 500
 
     $process = Start-Process -FilePath $deployerPath -ArgumentList "/sync" -PassThru
     $suppressed = 0
@@ -75,6 +109,7 @@ function Invoke-SyncOnce {
         ExitCode   = $process.ExitCode
         Suppressed = $suppressed
         EndTime    = Get-Date
+        Skipped    = $false
     }
 }
 
@@ -113,8 +148,20 @@ try {
         $result = Invoke-SyncOnce
         $exitCode = $result.ExitCode
 
+        if ($result.Skipped) {
+            Write-Warning "WeaselServer 在 ${StopTimeoutSeconds}s 内没有退出，跳过本轮（避免必然失败的同步）"
+            $exitCode = 1
+            if ($attempt -lt $MaxAttempts) {
+                Start-Sleep -Seconds $RetryDelaySeconds
+            }
+            continue
+        }
+
         if ($exitCode -ne 0) {
             Write-Warning "WeaselDeployer 返回 $exitCode"
+            if ($attempt -lt $MaxAttempts) {
+                Start-Sleep -Seconds $RetryDelaySeconds
+            }
             continue
         }
 
@@ -126,6 +173,9 @@ try {
             Write-Host "同步完成（压制复活实例 $($result.Suppressed) 次）"
         } else {
             Write-Warning "检测到 userdb LOCK 失败，准备重试"
+            if ($attempt -lt $MaxAttempts) {
+                Start-Sleep -Seconds $RetryDelaySeconds
+            }
         }
     }
 } catch {
@@ -137,9 +187,10 @@ try {
         try {
             $stillDown = -not (Get-Process -Name WeaselServer -ErrorAction SilentlyContinue)
             if ($stillDown) {
-                Start-Process -FilePath $serverPath
+                Start-Process -FilePath $serverPath -WindowStyle Hidden
                 Start-Sleep -Seconds 1
-                Write-Host "已重新启动 WeaselServer"
+                $restored = Get-Process -Name WeaselServer -ErrorAction SilentlyContinue
+                Write-Host "已重新启动 WeaselServer（PID $($restored.Id)，会话 $($restored.SessionId)）"
             }
         } catch {
             Write-Warning "重新启动 WeaselServer 失败：$($_.Exception.Message)"
