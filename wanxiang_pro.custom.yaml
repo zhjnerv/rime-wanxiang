@@ -74,6 +74,13 @@ patch:
   # 超级提示模块：仅覆盖禁用列表为全开，其余（tips_key: comma、files 等）自动继承主方案
   super_tips/disabled_types: []
 
+  # 光标移动：本机 rime.dll（Weasel 0.17.4，2025-02）不支持上游的 *_no_loop 动作
+  # （该组动作 librime 于 2025-11-29 才引入），继续使用会在启动时刷 invalid action 警告。
+  # 改用带循环的 left_by_char / right_by_char：把 left_by_char_no_loop 换成单键叶子路径覆盖，
+  # 避免整块替换 navigator/bindings 而丢掉 Shift+Left / Shift+Right 的音节跳转。
+  navigator/bindings/Left: left_by_char
+  navigator/bindings/Right: right_by_char
+
   # 成对符号包裹：仅增量覆盖个人保留项（上游将 r 改为了 |儿、v 改为了 〖〗），其余 90+ 项自动继承主方案
   paired_symbols/symkey/+:
     r: "〖〗" # 花括号扩展 / 装饰括号 (自定义保留，不转为儿化音)
@@ -88,6 +95,7 @@ patch:
 
   punctuator/half_shape:
     __include: wanxiang_symbols:/symbol_table/half_shape
+    "$": ["$", "￥", "¥"] # 中文直出半角美元，人民币符号退为备选
     "<": [<, "<>", 《, "<br>"]
     ">": [">", "<>", 》, "</br>"]
     "/": [/, ÷]
